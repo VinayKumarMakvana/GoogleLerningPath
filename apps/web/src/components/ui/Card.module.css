@@ -1,0 +1,27 @@
+.card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.content {
+  padding: var(--space-4) var(--space-5);
+  flex-grow: 1;
+}
+
+.footer {
+  padding: var(--space-3) var(--space-5);
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-surface-hover);
+  display: flex;
+  align-items: center;
+}

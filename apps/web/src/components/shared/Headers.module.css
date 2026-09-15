@@ -1,0 +1,28 @@
+.pageHeader {
+  margin-bottom: var(--space-6);
+}
+
+.title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-bottom: var(--space-2);
+}
+
+.description {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+}
+
+.sectionHeader {
+  margin-bottom: var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+}

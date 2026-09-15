@@ -1,0 +1,126 @@
+.roadmapViewer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.phaseCard {
+  overflow: hidden;
+  border-left: 4px solid var(--color-primary);
+}
+
+.phaseHeader {
+  padding: var(--space-4) var(--space-5);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color-surface);
+  transition: background-color 0.2s;
+}
+
+.phaseHeader:hover {
+  background-color: var(--color-surface-hover);
+}
+
+.phaseTitleWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--color-text-main);
+}
+
+.phaseTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.phaseContent {
+  padding: var(--space-5);
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-background);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.moduleSection {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+
+.moduleTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .skillsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.skillBox {
+  background-color: var(--color-surface-hover);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+.skillTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+  color: var(--color-text-main);
+}
+
+.topicList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.topicItem {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.topicItem:hover {
+  border-color: var(--color-primary-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.topicMain {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.topicMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
