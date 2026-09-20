@@ -17,8 +17,11 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  profile Profile?
-  goals   Goal[]
+  profile         Profile?
+  careerProfile   CareerProfile?
+  goals           Goal[]
+  jobApplications JobApplication[]
+  contributions   Contribution[]
 }
 
 model Profile {
@@ -119,6 +122,17 @@ model Topic {
 
   subtopics Subtopic[]
 
+  // Relations to content
+  learningContents LearningContent[]
+  notes            Note[]
+  shortNotes       ShortNote[]
+  cheatSheets      CheatSheet[]
+  resources        Resource[]
+  practiceProblemIds String[] @db.ObjectId
+  practiceProblems   PracticeProblem[] @relation(fields: [practiceProblemIds], references: [id])
+  assessments      Assessment[]
+  interviewQs      InterviewQuestion[]
+
   // Prerequisites (MongoDB arrays for M:N self-relations)
   prerequisiteIds    String[] @db.ObjectId
   prerequisites      Topic[]  @relation("TopicPrerequisites", fields: [prerequisiteIds], references: [id])
@@ -131,6 +145,7 @@ model Topic {
 
   skill Skill  @relation(fields: [skillId], references: [id], onDelete: Cascade)
   track Track? @relation(fields: [trackId], references: [id], onDelete: SetNull)
+  reviewFindings ReviewFinding[]
 }
 
 model Subtopic {
@@ -142,16 +157,6 @@ model Subtopic {
   updatedAt DateTime @updatedAt
 
   topic Topic @relation(fields: [topicId], references: [id], onDelete: Cascade)
-
-  // Relations to content
-  learningContents LearningContent[]
-  notes            Note[]
-  shortNotes       ShortNote[]
-  cheatSheets      CheatSheet[]
-  resources        Resource[]
-  practiceItems    PracticeItem[]
-  assessments      Assessment[]
-  interviewQs      InterviewQuestion[]
 }
 
 // ==================================================
@@ -159,22 +164,26 @@ model Subtopic {
 // ==================================================
 model LearningContent {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  subtopicId String   @db.ObjectId
+  topicId    String   @db.ObjectId
   title      String
   content    String
-  type       String // "ARTICLE", "VIDEO_LINK", "INTERACTIVE"
+  type       String   // "ARTICLE", "VIDEO_LINK", "INTERACTIVE"
+  status     String   @default("PUBLISHED") // "DRAFT", "PUBLISHED", "ARCHIVED"
+  version    Int      @default(1)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
-  subtopic Subtopic @relation(fields: [subtopicId], references: [id], onDelete: Cascade)
+  topic Topic @relation(fields: [topicId], references: [id], onDelete: Cascade)
 }
 
 model Note {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  subtopicId String   @db.ObjectId
-  userId     String   @db.ObjectId // If notes are personal, could be null if global
+  topicId    String   @db.ObjectId
+  userId     String?  @db.ObjectId // If notes are personal, could be null if global
   title      String
   content    String
+  status     String   @default("PUBLISHED")
+  version    Int      @default(1)
   
   tagIds     String[] @db.ObjectId
   tags       Tag[]    @relation(fields: [tagIds], references: [id])
@@ -182,112 +191,262 @@ model Note {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
-  subtopic Subtopic @relation(fields: [subtopicId], references: [id], onDelete: Cascade)
+  topic Topic @relation(fields: [topicId], references: [id], onDelete: Cascade)
 }
 
 model ShortNote {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  subtopicId String   @db.ObjectId
+  topicId    String   @db.ObjectId
   title      String
   content    String
+  status     String   @default("PUBLISHED")
+  version    Int      @default(1)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
-  subtopic Subtopic @relation(fields: [subtopicId], references: [id], onDelete: Cascade)
+  topic Topic @relation(fields: [topicId], references: [id], onDelete: Cascade)
 }
 
 model CheatSheet {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  subtopicId String   @db.ObjectId
+  topicId    String   @db.ObjectId
   title      String
   content    String
+  status     String   @default("PUBLISHED")
+  version    Int      @default(1)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
-  subtopic Subtopic @relation(fields: [subtopicId], references: [id], onDelete: Cascade)
+  topic Topic @relation(fields: [topicId], references: [id], onDelete: Cascade)
 }
 
 model Resource {
   id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  subtopicId    String   @db.ObjectId
+  topicId       String   @db.ObjectId
   title         String
-  url           String
-  type          String // "ARTICLE", "VIDEO", "COURSE", "TOOL"
-  priority      String // "S", "A", "B"
-  difficulty    String? // "BEGINNER", "INTERMEDIATE", "ADVANCED"
-  estimatedTime Int? // in minutes
+  url           String?
+  type          String   // "ARTICLE", "VIDEO", "COURSE", "TOOL"
+  priority      String   // "S", "A", "B"
+  difficulty    String?  // "BEGINNER", "INTERMEDIATE", "ADVANCED"
+  estimatedTime Int?     // in minutes
+  status        String   @default("PENDING") // "PENDING", "PUBLISHED"
+  version       Int      @default(1)
+  
+  source        String?  // e.g., "YouTube", "MDN", "Official Docs"
+  description   String?  // Short description
+  isOfficial    Boolean  @default(false)
+
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  subtopic Subtopic @relation(fields: [subtopicId], references: [id], onDelete: Cascade)
+  topic Topic @relation(fields: [topicId], references: [id], onDelete: Cascade)
 }
 
 // ==================================================
 // PRACTICE & ASSESSMENT
 // ==================================================
-model PracticeItem {
+model PracticeProblem {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  title           String
+  slug            String   @unique
+  statement       String
+  problemType     String   @default("CODING") // e.g., "CODING", "MCQ", "CONCEPTUAL", "SCENARIO"
+  options         Json?    // Array of { id: string, text: string } for MCQs
+  correctAnswer   String?  // ID of the correct option
+  explanation     String?  // Detailed explanation shown after submission
+  difficulty      String   // "EASY", "MEDIUM", "HARD"
+  source          String?  // e.g., "LeetCode 1"
+  sourceProblemId String?  // e.g., "1"
+  sourceUrl       String?
+  platform        String?  // "LEETCODE", "CODEFORCES"
+  
+  topicIds        String[] @db.ObjectId
+  topics          Topic[]  @relation(fields: [topicIds], references: [id])
+  
+  patternIds      String[] @db.ObjectId
+  patterns        DsaPattern[] @relation(fields: [patternIds], references: [id])
+  
+  tags            String[]
+  constraints     String[]
+  inputFormat     String?
+  outputFormat    String?
+  examples        Json[]
+  hints           String[]
+  expectedTime    String?
+  expectedSpace   String?
+  status          String   @default("DRAFT")
+  version         Int      @default(1)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  attempts        PracticeAttempt[]
+  assessmentProblems AssessmentProblem[]
+  assessmentResults  AssessmentResult[]
+  userStates         UserProblemState[]
+}
+
+model DsaPattern {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  subtopicId  String   @db.ObjectId
-  title       String
+  name        String   @unique
+  slug        String   @unique
   description String?
-  difficulty  String
-  platform    String? // e.g., "LeetCode", "Codeforces"
-  url         String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  subtopic Subtopic          @relation(fields: [subtopicId], references: [id], onDelete: Cascade)
-  attempts PracticeAttempt[]
+  problemIds  String[] @db.ObjectId
+  problems    PracticeProblem[] @relation(fields: [problemIds], references: [id])
+  userMastery UserPatternMastery[]
 }
 
 model PracticeAttempt {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  practiceId String   @db.ObjectId
-  userId     String   @db.ObjectId
-  status     String // "SOLVED", "ATTEMPTED", "GAVE_UP"
-  timeSpent  Int? // in minutes
-  notes      String?
-  createdAt  DateTime @default(now())
+  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+  practiceProblemId   String   @db.ObjectId
+  userId              String   @db.ObjectId
+  status              String   // "STARTED", "SOLVED", "FAILED", "ABANDONED"
+  result              String?
+  language            String?
+  timeSpent           Int?
+  
+  // Hint Tracking
+  hintsUsed           Int      @default(0)
+  highestHintLevel    Int      @default(-1)
+  hintDetails         Json[]   // e.g. [{ level: 0, timestamp: "2026-09-19..." }]
 
-  practice PracticeItem @relation(fields: [practiceId], references: [id], onDelete: Cascade)
+  // Review & Mistake Categories
+  reviewState         String?  // "SOLVED_CONFIDENTLY", "SOLVED_WITH_HINTS", "STRUGGLED", "NEEDS_REVIEW"
+  mistakeCategories   String[] // ["Concept Gap", "Pattern Recognition Gap", "Implementation Error", "Complexity Error", "Edge Case Error", "Syntax Error", "Needed Hint"]
+  
+  complexityReviewed  Boolean  @default(false)
+  userTimeComplexity  String?
+  userSpaceComplexity String?
+  
+  startedAt           DateTime @default(now())
+  submittedAt         DateTime?
+  updatedAt           DateTime @updatedAt
+
+  practice PracticeProblem @relation(fields: [practiceProblemId], references: [id], onDelete: Cascade)
+  
+  interviewSessionId  String?  @db.ObjectId
+  interviewSession    InterviewSession? @relation(fields: [interviewSessionId], references: [id], onDelete: SetNull)
 }
 
 model Assessment {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  subtopicId String   @db.ObjectId
-  title      String
-  type       String // "QUIZ", "CODING", "PROJECT"
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String?
+  type        String   // "PATTERN", "TOPIC", "MIXED", "INTERVIEW"
+  difficulty  String   // "EASY", "MEDIUM", "HARD"
+  duration    Int      // in minutes
+  status      String   @default("PUBLISHED")
+  version     Int      @default(1)
+  
+  topicId     String?  @db.ObjectId
+  topic       Topic?   @relation(fields: [topicId], references: [id])
+  
+  problems    AssessmentProblem[]
+  attempts    AssessmentAttempt[]
 
-  subtopic Subtopic            @relation(fields: [subtopicId], references: [id], onDelete: Cascade)
-  attempts AssessmentAttempt[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model AssessmentProblem {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  assessmentId      String   @db.ObjectId
+  practiceProblemId String   @db.ObjectId
+  order             Int
+  
+  assessment        Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  practiceProblem   PracticeProblem @relation(fields: [practiceProblemId], references: [id])
+  
+  createdAt         DateTime @default(now())
 }
 
 model AssessmentAttempt {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
   assessmentId String   @db.ObjectId
   userId       String   @db.ObjectId
-  score        Float
-  passed       Boolean
-  createdAt    DateTime @default(now())
+  status       String   // "NOT_STARTED", "IN_PROGRESS", "SUBMITTED", "TIMED_OUT", "ABANDONED"
+  
+  startedAt    DateTime @default(now())
+  submittedAt  DateTime?
+  
+  score        Float?
+  timeUsed     Int?     // in seconds
+  
+  assessment   Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  results      AssessmentResult[]
 
-  assessment Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model AssessmentResult {
+  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+  attemptId           String   @db.ObjectId
+  practiceProblemId   String   @db.ObjectId
+  
+  status              String   // "SOLVED", "FAILED", "SKIPPED", "STARTED"
+  timeSpent           Int?     // in seconds
+  hintsUsed           Int      @default(0)
+  
+  attempt             AssessmentAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  practiceProblem     PracticeProblem @relation(fields: [practiceProblemId], references: [id])
+}
+
+// ==================================================
+// MASTERY & REVISION ENGINE (Phase 5E)
+// ==================================================
+model UserPatternMastery {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  patternId String   @db.ObjectId
+  state     String   // "NOT_STARTED", "LEARNING", "PRACTICING", "REVIEW", "MASTERED"
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  pattern   DsaPattern @relation(fields: [patternId], references: [id], onDelete: Cascade)
+}
+
+model UserProblemState {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String   @db.ObjectId
+  practiceProblemId String   @db.ObjectId
+  
+  nextReviewDate    DateTime?
+  reviewInterval    Int?      // in days
+  status            String    // "SOLVED", "FAILED", "NEEDS_REVIEW", etc.
+  
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  practiceProblem   PracticeProblem @relation(fields: [practiceProblemId], references: [id], onDelete: Cascade)
 }
 
 // ==================================================
 // PROJECTS
 // ==================================================
 model Project {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
-  description String
-  category    String // "FLAGSHIP", "SUPPORTING"
-  difficulty  String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+  title               String
+  slug                String   @unique
+  description         String
+  category            String   // "FLAGSHIP", "SUPPORTING"
+  difficulty          String
+  projectType         String   // e.g., "FULLSTACK", "SYSTEMS", "BACKEND"
+  targetSkills        String[]
+  technologies        String[]
+  architectureSummary String
+  estimatedHours      Int
+  githubUrl           String?  // Template repo if available
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
 
-  milestones ProjectMilestone[]
+  milestones          ProjectMilestone[]
+  userStates          UserProjectState[]
+  contributions       Contribution[]
 }
 
 model ProjectMilestone {
@@ -299,7 +458,128 @@ model ProjectMilestone {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  project     Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  tasks       ProjectTask[]
+}
+
+model ProjectTask {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  milestoneId      String   @db.ObjectId
+  title            String
+  description      String
+  estimatedMinutes Int      @default(60)
+  order            Int
+  prerequisiteIds  String[] @db.ObjectId // Optional links to Topic IDs
+  userId           String?  @db.ObjectId // If set, this task is a custom finding revision for a specific user
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  milestone        ProjectMilestone @relation(fields: [milestoneId], references: [id], onDelete: Cascade)
+  userStates       UserTaskState[]
+  reviewFindings   ReviewFinding[]
+}
+
+model UserProjectState {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId         String   @db.ObjectId
+  projectId      String   @db.ObjectId
+  status         String   @default("NOT_STARTED") // "NOT_STARTED", "ACTIVE", "COMPLETED"
+  githubUrl      String?  // User's implementation repo
+  deploymentUrl  String?  // User's live link
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  project        Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  submissions    ProjectSubmission[]
+  
+  @@unique([userId, projectId])
+}
+
+model UserTaskState {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String   @db.ObjectId
+  taskId      String   @db.ObjectId
+  status      String   @default("NOT_STARTED") // "NOT_STARTED", "COMPLETED"
+  notes       String?
+  evidenceUrl String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  task        ProjectTask @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, taskId])
+}
+
+// ==================================================
+// CAREER & INTERNSHIP
+// ==================================================
+model CareerProfile {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId           String   @unique @db.ObjectId
+  targetRole       String   @default("Software Engineer")
+  targetLocations  String[]
+  education        String?
+  experience       String?
+  resumeStatus     String   @default("NEEDS_UPDATE") // "NEEDS_UPDATE", "READY", "REVIEWING"
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model JobApplication {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId          String   @db.ObjectId
+  company         String
+  role            String
+  location        String?
+  jobUrl          String?
+  applicationDate DateTime?
+  status          String   @default("SAVED") // "SAVED", "APPLIED", "INTERVIEW", "OFFER", "REJECTED", "WITHDRAWN"
+  nextAction      String?
+  followUpDate    DateTime?
+  notes           String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ==================================================
+// OPEN SOURCE & GITHUB
+// ==================================================
+model Contribution {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId          String   @db.ObjectId
+  repoName        String
+  repoUrl         String
+  organization    String?
+  type            String   // "ISSUE", "PR", "CODE", "DOCUMENTATION", "BUG_FIX", "FEATURE"
+  status          String   @default("PLANNED") // "PLANNED", "IN_PROGRESS", "SUBMITTED", "MERGED", "CLOSED"
+  targetDate      DateTime?
+  completionDate  DateTime?
+  prUrl           String?
+  notes           String?
+  projectId       String?  @db.ObjectId // Optional relation to flagship project
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project         Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  tasks           ContributionTask[]
+}
+
+model ContributionTask {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  contributionId  String   @db.ObjectId
+  title           String
+  status          String   @default("PENDING") // "PENDING", "COMPLETED"
+  order           Int
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  contribution    Contribution @relation(fields: [contributionId], references: [id], onDelete: Cascade)
 }
 
 // ==================================================
@@ -307,24 +587,32 @@ model ProjectMilestone {
 // ==================================================
 model InterviewQuestion {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  subtopicId String   @db.ObjectId
+  topicId    String   @db.ObjectId
   question   String
   answerHint String?
-  type       String // "TECHNICAL", "BEHAVIORAL", "SYSTEM_DESIGN"
+  type       String   // "TECHNICAL", "BEHAVIORAL", "SYSTEM_DESIGN"
+  status     String   @default("PUBLISHED")
+  version    Int      @default(1)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
-  subtopic Subtopic @relation(fields: [subtopicId], references: [id], onDelete: Cascade)
+  topic Topic @relation(fields: [topicId], references: [id], onDelete: Cascade)
 }
 
 model InterviewSession {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   userId    String   @db.ObjectId
-  date      DateTime
-  type      String // "MOCK", "REAL"
+  date      DateTime @default(now())
+  type      String   // "MOCK", "REAL"
+  status    String   @default("STARTED") // "STARTED", "COMPLETED", "ABANDONED"
+  score     Float?
+  problems  String[] // store problem slugs selected for mock
   feedback  String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  
+  attempts        PracticeAttempt[]
+  projectDefenses ProjectDefense[]
 }
 
 // ==================================================
@@ -334,7 +622,7 @@ model Progress {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   userId     String   // Intentionally left as String for generic ID tracking
   entityId   String   // Intentionally left as String since it could point to multiple models
-  entityType String // "TOPIC", "SUBTOPIC"
+  entityType String // "TOPIC", "SUBTOPIC", "CHEAT_SHEET"
   status     String // "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
@@ -364,12 +652,37 @@ model RevisionItem {
 }
 
 model DailyPlan {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId    String   @db.ObjectId
-  date      DateTime
-  notes     String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId        String   @db.ObjectId
+  date          DateTime
+  notes         String?
+  targetTime    Int      @default(180) // in minutes
+  plannedTime   Int      @default(0)   // in minutes
+  completedTime Int      @default(0)   // in minutes
+  status        String   @default("ACTIVE") // ACTIVE, COMPLETED, MISSED
+  
+  tasks         DailyPlanTask[]
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model DailyPlanTask {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  planId           String   @db.ObjectId
+  type             String   // LEARN_TOPIC, PRACTICE_PROBLEM, REVIEW_PROBLEM, TAKE_ASSESSMENT, INTERVIEW_PRACTICE, REVISE_NOTES
+  title            String
+  reason           String
+  entityId         String?  // Reference to Topic/Problem/Assessment ID
+  entitySlug       String?
+  estimatedMinutes Int
+  priority         Int      // 1 (highest) to N
+  status           String   @default("PENDING") // PENDING, COMPLETED, SKIPPED
+  
+  plan             DailyPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+  
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 }
 
 // ==================================================
@@ -389,4 +702,86 @@ model Bookmark {
   entityId   String   @db.ObjectId
   entityType String
   createdAt  DateTime @default(now())
+}
+
+// ==================================================
+// PROJECT CODE REVIEW & DEFENSE (Phase 11)
+// ==================================================
+
+model ProjectSubmission {
+  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+  userProjectStateId  String   @db.ObjectId
+  githubUrl           String?
+  deploymentUrl       String?
+  architectureUrl     String?
+  status              String   @default("PENDING_REVIEW") // PENDING_REVIEW, IN_REVIEW, NEEDS_REVISION, VERIFIED
+  
+  reviews             ProjectReview[]
+  defenses            ProjectDefense[]
+  evidence            VerifiedEvidence?
+  
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  
+  userProjectState    UserProjectState @relation(fields: [userProjectStateId], references: [id], onDelete: Cascade)
+}
+
+model ProjectReview {
+  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+  submissionId        String   @db.ObjectId
+  status              String   // PASSED, REVISION_REQUIRED, RESUBMISSION_REQUIRED
+  findings            ReviewFinding[]
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  submission          ProjectSubmission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+}
+
+model ReviewFinding {
+  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+  reviewId            String   @db.ObjectId
+  category            String   // Code Quality, Architecture, Correctness, Testing, Security, Performance, Observability, Reliability, Maintainability, Documentation
+  severity            String   // LOW, MEDIUM, HIGH, CRITICAL
+  explanation         String
+  affectedArea        String?
+  recommendation      String
+  status              String   @default("OPEN") // OPEN, RESOLVED
+  
+  // Link to curriculum topic
+  relatedTopicId      String?  @db.ObjectId
+  relatedTopic        Topic?   @relation(fields: [relatedTopicId], references: [id])
+  
+  // Custom generated task for revision loop
+  generatedTaskId     String?  @db.ObjectId
+  generatedTask       ProjectTask? @relation(fields: [generatedTaskId], references: [id])
+
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  review              ProjectReview @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+}
+
+model ProjectDefense {
+  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+  submissionId        String   @db.ObjectId
+  type                String   // Architecture, Code, System Design, Security, Reliability/Observability, Performance
+  status              String   @default("PENDING") // PENDING, PASSED, FAILED
+  
+  interviewSessionId  String?  @db.ObjectId // Leverages existing InterviewSession for the actual Q&A engine
+  interviewSession    InterviewSession? @relation(fields: [interviewSessionId], references: [id])
+
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  submission          ProjectSubmission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+}
+
+model VerifiedEvidence {
+  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+  submissionId        String   @unique @db.ObjectId
+  userId              String   @db.ObjectId
+  projectId           String   @db.ObjectId
+  
+  verifiedAt          DateTime @default(now())
+  githubUrl           String?
+  deploymentUrl       String?
+  
+  submission          ProjectSubmission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
 }

@@ -2,18 +2,37 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+const cppFoundation = [
+  'Program structure', 'Variables', 'Data types', 'Operators', 'Input/output',
+  'Conditions', 'Loops', 'Functions', 'Scope', 'Arrays', 'Strings', 'References',
+  'Pointers', 'Structs', 'Classes', 'Constructors', 'Destructors', 'Basic OOP',
+  'Memory fundamentals'
+];
+
+const cppEngineering = [
+  'vector', 'string', 'array', 'deque', 'list', 'stack', 'queue', 'priority_queue',
+  'set', 'multiset', 'map', 'unordered_map', 'unordered_set', 'iterators',
+  'algorithms', 'lambdas', 'complexity fundamentals'
+];
+
+const dsaFoundation = [
+  'Time complexity', 'Space complexity', 'Array traversal', 'Array manipulation',
+  'String manipulation', 'Basic hashing', 'Sorting fundamentals', 'Two pointers introduction',
+  'Sliding window introduction', 'Prefix sum introduction', 'Binary search introduction',
+  'Linked list fundamentals', 'Stack fundamentals', 'Queue fundamentals'
+];
+
 async function main() {
   console.log('Seeding Database...');
 
-  // Clean up existing data to prevent duplicates on re-run
-  await prisma.topic.deleteMany();
-  await prisma.skill.deleteMany();
-  await prisma.module.deleteMany();
-  await prisma.phase.deleteMany();
-  await prisma.roadmap.deleteMany();
-  await prisma.track.deleteMany();
+  // Check if data already exists to prevent accidental seed regeneration
+  const existingRoadmap = await prisma.roadmap.findFirst({ where: { title: 'Google SWE Preparation' } });
+  if (existingRoadmap) {
+    console.log('Database already seeded. Skipping to prevent destructive regeneration.');
+    return;
+  }
 
-  // 1. Create Tracks
+  // Tracks
   const tracks = [
     { title: 'TRACK 1 — C++ + DSA + COMPETITIVE PROGRAMMING' },
     { title: 'TRACK 2 — COMPUTER SCIENCE FUNDAMENTALS' },
@@ -38,7 +57,7 @@ async function main() {
     });
   }
 
-  // 2. Create Master Roadmap
+  // Master Roadmap
   const masterRoadmap = await prisma.roadmap.create({
     data: {
       title: 'Google SWE Preparation',
@@ -46,116 +65,106 @@ async function main() {
     }
   });
 
-  // 3. Create Phases
-  const phasesData = [
-    { order: 0, title: 'PHASE 0: Setup + Learning System' },
-    { order: 1, title: 'PHASE 1: C++ Fundamentals + DSA Foundation + Git' },
-    { order: 2, title: 'PHASE 2: DSA Core + CS Fundamentals + TypeScript/Node fundamentals' },
-    { order: 3, title: 'PHASE 3: Backend Engineering + PostgreSQL + MongoDB + Testing' },
-    { order: 4, title: 'PHASE 4: Advanced DSA + Backend Production + Redis + Queues' },
-    { order: 5, title: 'PHASE 5: Docker + CI/CD + Cloud + Security' },
-    { order: 6, title: 'PHASE 6: Architecture + Microservices + Kafka/RabbitMQ + Kubernetes' },
-    { order: 7, title: 'PHASE 7: System Design + Distributed Systems + Observability' },
-    { order: 8, title: 'PHASE 8: AI/ML Mathematics + ML + Deep Learning' },
-    { order: 9, title: 'PHASE 9: LLMs + RAG + Agents + AI Systems' },
-    { order: 10, title: 'PHASE 10: Flagship Projects + Open Source + Production Experience' },
-    { order: 11, title: 'PHASE 11: Internship + Interview + Career Execution' },
-    { order: 12, title: 'PHASE 12: Final Big Tech Interview Preparation' }
+  // Phases
+  const phase1 = await prisma.phase.create({
+    data: {
+      title: 'PHASE 1: C++ Fundamentals + DSA Foundation',
+      order: 1,
+      roadmapId: masterRoadmap.id
+    }
+  });
+
+  // Modules
+  const cppModule = await prisma.module.create({
+    data: { title: 'C++ Fundamentals', order: 1, phaseId: phase1.id }
+  });
+  const dsaModule = await prisma.module.create({
+    data: { title: 'DSA Foundation', order: 2, phaseId: phase1.id }
+  });
+
+  // Skills
+  const cppSkill = await prisma.skill.create({
+    data: { title: 'Core C++', moduleId: cppModule.id }
+  });
+  const dsaSkill = await prisma.skill.create({
+    data: { title: 'Core DSA', moduleId: dsaModule.id }
+  });
+
+  const allTopics = [
+    ...cppFoundation.map(t => ({ title: t, skillId: cppSkill.id, trackId: trackRecords['track_1'].id })),
+    ...cppEngineering.map(t => ({ title: t, skillId: cppSkill.id, trackId: trackRecords['track_1'].id })),
+    ...dsaFoundation.map(t => ({ title: t, skillId: dsaSkill.id, trackId: trackRecords['track_1'].id }))
   ];
 
-  const phases = [];
-  for (const p of phasesData) {
-    const phase = await prisma.phase.create({
+  let order = 1;
+  for (const tData of allTopics) {
+    const topic = await prisma.topic.create({
       data: {
-        title: p.title,
-        order: p.order,
-        roadmapId: masterRoadmap.id
+        title: tData.title,
+        order: order++,
+        skillId: tData.skillId,
+        trackId: tData.trackId,
+        difficulty: 'BEGINNER',
+        priority: 'MUST_HAVE'
       }
     });
-    phases.push(phase);
+
+    // Populate Proof-of-concept Deep Content
+    if (tData.title === 'Pointers') {
+      await prisma.learningContent.create({
+        data: {
+          topicId: topic.id,
+          title: 'Understanding Pointers in C++',
+          type: 'ARTICLE',
+          content: `# What is a Pointer?\nA pointer is a variable that stores the memory address of another variable.\n\n## Why does it matter?\nPointers are critical in C++ for dynamic memory allocation, efficient array manipulation, and building complex data structures like trees and graphs.\n\n## Core Concept\nWhen you declare a variable \`int x = 10;\`, it's stored in memory. A pointer \`int* ptr = &x;\` holds that exact memory address.\n\n## Example\n\`\`\`cpp\nint x = 10;\nint* ptr = &x; // ptr holds address of x\ncout << *ptr; // Dereferencing: outputs 10\n\`\`\`\n\n## Common Mistakes\n* **Dangling Pointers**: Pointing to memory that has been deallocated.\n* **Uninitialized Pointers**: Dereferencing a pointer that hasn't been assigned an address (causes segfaults).`
+        }
+      });
+      await prisma.shortNote.create({
+        data: {
+          topicId: topic.id,
+          title: 'Pointers Quick Review',
+          content: `* **Definition**: Stores a memory address.\n* **Syntax**: \`int* p = &x;\`\n* **Dereference**: \`*p\` gets the value at the address.\n* **Memory Leak**: Forgetting to \`delete\` dynamically allocated memory.`
+        }
+      });
+      await prisma.cheatSheet.create({
+        data: {
+          topicId: topic.id,
+          title: 'Pointers Cheat Sheet',
+          content: `| Operation | Syntax | Description |\n|---|---|---|\n| Address-of | \`&x\` | Gets memory address |\n| Dereference | \`*p\` | Gets value at address |\n| Null Pointer | \`nullptr\` | Safe empty pointer |`
+        }
+      });
+      await prisma.resource.create({
+        data: {
+          topicId: topic.id,
+          title: 'C++ Pointers Documentation',
+          url: 'https://en.cppreference.com/w/cpp/language/pointer',
+          type: 'ARTICLE',
+          priority: 'S',
+          status: 'PUBLISHED'
+        }
+      });
+    } else {
+      await prisma.shortNote.create({
+        data: {
+          topicId: topic.id,
+          title: `${tData.title} Notes`,
+          content: 'Content pending curation.',
+          status: 'DRAFT'
+        }
+      });
+      await prisma.resource.create({
+        data: {
+          topicId: topic.id,
+          title: 'Pending Official Resource',
+          type: 'ARTICLE',
+          priority: 'A',
+          status: 'PENDING'
+        }
+      });
+    }
   }
 
-  // 4. Create Modules & Skills (Example for Phase 1)
-  const cppModule = await prisma.module.create({
-    data: {
-      title: 'C++ Fundamentals',
-      order: 1,
-      phaseId: phases[1].id
-    }
-  });
-
-  const cppBasicsSkill = await prisma.skill.create({
-    data: {
-      title: 'Syntax & Core Concepts',
-      moduleId: cppModule.id
-    }
-  });
-
-  const dsaModule = await prisma.module.create({
-    data: {
-      title: 'DSA Foundation',
-      order: 2,
-      phaseId: phases[1].id
-    }
-  });
-
-  const dsaBasicsSkill = await prisma.skill.create({
-    data: {
-      title: 'Arrays & Strings',
-      moduleId: dsaModule.id
-    }
-  });
-
-  // 5. Create Topics and Prerequisites
-  const cppVars = await prisma.topic.create({
-    data: {
-      title: 'Variables & Data Types',
-      description: 'Understanding primitive types in C++',
-      order: 1,
-      skillId: cppBasicsSkill.id,
-      trackId: trackRecords['track_1'].id,
-      difficulty: 'BEGINNER',
-      priority: 'MUST_HAVE',
-      estimatedLearnTime: 60,
-      estimatedPracticeTime: 30
-    }
-  });
-
-  const cppPointers = await prisma.topic.create({
-    data: {
-      title: 'Pointers & References',
-      description: 'Memory addresses and reference semantics',
-      order: 2,
-      skillId: cppBasicsSkill.id,
-      trackId: trackRecords['track_1'].id,
-      difficulty: 'INTERMEDIATE',
-      priority: 'MUST_HAVE',
-      estimatedLearnTime: 90,
-      estimatedPracticeTime: 60,
-      prerequisites: {
-        connect: [{ id: cppVars.id }]
-      }
-    }
-  });
-
-  const dsaArrays = await prisma.topic.create({
-    data: {
-      title: 'Array Traversal & Manipulation',
-      description: 'Basic array algorithms',
-      order: 1,
-      skillId: dsaBasicsSkill.id,
-      trackId: trackRecords['track_1'].id,
-      difficulty: 'BEGINNER',
-      priority: 'MUST_HAVE',
-      estimatedLearnTime: 45,
-      estimatedPracticeTime: 120,
-      prerequisites: {
-        connect: [{ id: cppPointers.id }] // Example cross-skill prereq
-      }
-    }
-  });
-
-  console.log('Database seeded successfully!');
+  console.log('Database seeded successfully with 50 Foundation topics and Content Skeletons!');
 }
 
 main()

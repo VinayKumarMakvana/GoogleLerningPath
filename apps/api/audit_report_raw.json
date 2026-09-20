@@ -1,0 +1,493 @@
+{
+  "overview": {
+    "totalTopics": 50,
+    "pass": 45,
+    "requireFixes": 5,
+    "incomplete": 0
+  },
+  "contentMatrix": [
+    {
+      "topic": "Program structure",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 2,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Variables",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 2,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Data types",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 2,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Operators",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Input/output",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Conditions",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Loops",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Functions",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 2,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Scope",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Arrays",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Strings",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 2,
+      "overall": "PASS"
+    },
+    {
+      "topic": "References",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 2,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Pointers",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 2,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Structs",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Classes",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 2,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Constructors",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 2,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Destructors",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Basic OOP",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Memory fundamentals",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 2,
+      "overall": "PASS"
+    },
+    {
+      "topic": "vector",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 2,
+      "overall": "PASS"
+    },
+    {
+      "topic": "string",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "array",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 2,
+      "overall": "PASS"
+    },
+    {
+      "topic": "deque",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "list",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "stack",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "queue",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "priority_queue",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "set",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "multiset",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "map",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "unordered_map",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "unordered_set",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "iterators",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "algorithms",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "lambdas",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "complexity fundamentals",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Time complexity",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Space complexity",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Array traversal",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Array manipulation",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "String manipulation",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Basic hashing",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Sorting fundamentals",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Two pointers introduction",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Sliding window introduction",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Prefix sum introduction",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Binary search introduction",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Linked list fundamentals",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Stack fundamentals",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    },
+    {
+      "topic": "Queue fundamentals",
+      "learn": "OK",
+      "notes": "OK",
+      "shortNotes": "OK",
+      "cheatSheet": "OK",
+      "resources": 1,
+      "overall": "PASS"
+    }
+  ],
+  "technicalIssues": [
+    {
+      "issue": "unordered_map claims O(1) without mentioning collisions/worst-case.",
+      "topic": "string",
+      "severity": "MEDIUM"
+    },
+    {
+      "issue": "unordered_map claims O(1) without mentioning collisions/worst-case.",
+      "topic": "list",
+      "severity": "MEDIUM"
+    },
+    {
+      "issue": "unordered_map claims O(1) without mentioning collisions/worst-case.",
+      "topic": "iterators",
+      "severity": "MEDIUM"
+    },
+    {
+      "issue": "unordered_map claims O(1) without mentioning collisions/worst-case.",
+      "topic": "Prefix sum introduction",
+      "severity": "MEDIUM"
+    },
+    {
+      "issue": "Binary Search uses unsafe (low+high)/2 calculation.",
+      "topic": "Binary search introduction",
+      "severity": "CRITICAL"
+    }
+  ],
+  "resourceIssues": [],
+  "database": {
+    "orphans": [],
+    "duplicates": [],
+    "invalidRelations": []
+  }
+}

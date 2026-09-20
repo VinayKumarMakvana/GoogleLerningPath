@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Card, CardHeader, CardContent } from '@/components/ui/Card';
+import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
-import { ChevronDown, ChevronRight, Clock, Target, AlertCircle } from 'lucide-react';
+import { ChevronDown, ChevronRight, Clock, Target } from 'lucide-react';
+import Link from 'next/link';
 import styles from './RoadmapViewer.module.css';
 
 interface Topic {
@@ -82,18 +83,20 @@ export function RoadmapViewer({ roadmap }: RoadmapViewerProps) {
                         <h4 className={styles.skillTitle}>{skill.title}</h4>
                         <ul className={styles.topicList}>
                           {skill.topics.map(topic => (
-                            <li key={topic.id} className={styles.topicItem}>
-                              <div className={styles.topicMain}>
-                                <span>{topic.title}</span>
-                                <Badge variant={getPriorityColor(topic.priority) as any}>
-                                  {topic.priority.replace('_', ' ')}
-                                </Badge>
-                              </div>
-                              <div className={styles.topicMeta}>
-                                <Clock size={12} /> {topic.estimatedLearnTime + topic.estimatedPracticeTime} min
-                                <Target size={12} style={{ marginLeft: '8px' }}/> {topic.difficulty}
-                              </div>
-                            </li>
+                            <Link href={`/topics/${topic.id}`} key={topic.id} style={{ textDecoration: 'none' }}>
+                              <li className={styles.topicItem}>
+                                <div className={styles.topicMain}>
+                                  <span>{topic.title}</span>
+                                  <Badge variant={getPriorityColor(topic.priority) as "default" | "error" | "primary" | "warning"}>
+                                    {topic.priority.replace('_', ' ')}
+                                  </Badge>
+                                </div>
+                                <div className={styles.topicMeta}>
+                                  <Clock size={12} /> {topic.estimatedLearnTime + topic.estimatedPracticeTime} min
+                                  <Target size={12} style={{ marginLeft: '8px' }}/> {topic.difficulty}
+                                </div>
+                              </li>
+                            </Link>
                           ))}
                         </ul>
                       </div>

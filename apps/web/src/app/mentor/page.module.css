@@ -1,0 +1,181 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.chatCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.chatArea {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background-color: var(--surface-color);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  min-height: 500px;
+}
+
+.message {
+  display: flex;
+  gap: 1rem;
+  max-width: 85%;
+}
+
+.userMsg {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.userMsg .text {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 8px 8px 0 8px;
+}
+
+.mentorMsg {
+  align-self: flex-start;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--primary-color);
+}
+
+.messageContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mentorMsg .text {
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  padding: 0.75rem 1rem;
+  border-radius: 8px 8px 8px 0;
+  color: var(--text-color);
+}
+
+.mentorData {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.factBox {
+  background-color: rgba(var(--primary-color-rgb), 0.1);
+  border-left: 3px solid var(--primary-color);
+  padding: 0.75rem;
+  border-radius: 0 4px 4px 0;
+}
+
+.recBox {
+  background-color: rgba(46, 204, 113, 0.1);
+  border-left: 3px solid #2ecc71;
+  padding: 0.75rem;
+  border-radius: 0 4px 4px 0;
+}
+
+.actionsBox {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.sideCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contextCard h3, .suggestionsCard h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+}
+
+.contextList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contextList li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.contextList li svg {
+  color: var(--primary-color);
+}
+
+.questionList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.questionBtn {
+  background: none;
+  border: 1px solid var(--border-color);
+  padding: 0.75rem;
+  border-radius: 6px;
+  text-align: left;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.questionBtn:hover:not(:disabled) {
+  border-color: var(--primary-color);
+  background-color: rgba(var(--primary-color-rgb), 0.05);
+}
+
+.questionBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}

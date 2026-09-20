@@ -1,0 +1,236 @@
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  padding: 0;
+}
+
+.backButton:hover {
+  color: var(--primary-color);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.header {
+  margin-bottom: 1.5rem;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.titleRow h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: var(--text-primary);
+}
+
+.solvedIcon {
+  color: var(--success-color, #22c55e);
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sourceLink {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.sourceLink:hover {
+  text-decoration: underline;
+}
+
+.statementCard {
+  background-color: var(--bg-surface);
+}
+
+.markdownBody {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+}
+
+.examples h3, .constraints h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.exampleBlock {
+  background-color: var(--bg-background);
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-family: monospace;
+  font-size: 0.95rem;
+}
+
+.exampleBlock p {
+  margin: 0.25rem 0;
+}
+
+.constraints ul {
+  padding-left: 1.5rem;
+  color: var(--text-secondary);
+}
+
+.constraints li {
+  margin-bottom: 0.5rem;
+}
+
+.actionCard, .hintCard, .metaCard {
+  margin-bottom: 1.5rem;
+}
+
+.actionCard h3, .metaCard h3 {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.statusBox {
+  padding: 0.75rem;
+  background-color: var(--bg-background);
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.honorSystem p {
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.hintHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.hintHeader h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.hintsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.hintItem {
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--bg-background);
+}
+
+.hintText {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.hintLocked {
+  color: var(--text-tertiary);
+  font-style: italic;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.complexityRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.reviewForm {
+  margin-top: 1rem;
+}
+
+.reviewForm h4 {
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.reviewOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.mistakesSection {
+  background-color: var(--bg-background);
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+}
+
+.mistakesGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}

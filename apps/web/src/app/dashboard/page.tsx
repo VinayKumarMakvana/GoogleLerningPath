@@ -1,6 +1,7 @@
 import React from 'react';
+import Link from 'next/link';
 import { PageHeader, SectionHeader } from '@/components/shared/Headers';
-import { Card, CardHeader, CardContent } from '@/components/ui/Card';
+import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { ProgressBar } from '@/components/ui/ProgressBar';
 import { Badge } from '@/components/ui/Badge';
@@ -132,7 +133,9 @@ export default function DashboardPage() {
           <section>
             <SectionHeader title="Quick Actions" />
             <div className={styles.quickActions}>
-              <Button variant="outline">Practice</Button>
+              <Link href="/practice">
+                <Button variant="outline">Practice</Button>
+              </Link>
               <Button variant="outline">Revise</Button>
             </div>
           </section>

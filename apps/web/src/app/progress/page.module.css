@@ -1,0 +1,150 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.dashboardGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.mainCol {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.sideCol {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.statCard {
+  text-align: center;
+  padding: 1.5rem !important;
+}
+
+.statValue {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  margin: 0.5rem 0;
+}
+
+.statLabel {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+.revisionList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.revisionCard {
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.revisionCard:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary-color);
+}
+
+.revisionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.revisionHeader h4 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.revisionReason {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.activityList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.activityItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 8px;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+}
+
+.activityTitle {
+  font-weight: 500;
+}
+
+.activityMeta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.masteryBars {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.masteryRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.masteryLabel {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .dashboardGrid {
+    grid-template-columns: 1fr;
+  }
+}

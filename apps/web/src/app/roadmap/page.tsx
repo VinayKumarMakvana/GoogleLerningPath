@@ -4,10 +4,22 @@ import { EmptyState } from '@/components/shared/EmptyState';
 import { Construction } from 'lucide-react';
 import { RoadmapViewer } from '@/components/curriculum/RoadmapViewer';
 
+export const dynamic = 'force-dynamic';
+
 async function getRoadmap() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/curriculum/roadmap`, {
-      cache: 'no-store'
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api/v1';
+    
+    // Phase 8D: Extract JWT token securely from cookies for SSR
+    const { cookies } = await import('next/headers');
+    const cookieStore = await cookies();
+    const token = cookieStore.get('token')?.value;
+
+    const res = await fetch(`${apiUrl}/curriculum/roadmap`, {
+      cache: 'no-store',
+      headers: {
+        ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+      }
     });
     if (!res.ok) {
       throw new Error('Failed to fetch roadmap');

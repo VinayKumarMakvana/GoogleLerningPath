@@ -4,14 +4,15 @@ import styles from './Headers.module.css';
 interface PageHeaderProps {
   title: string;
   description?: string;
+  subtitle?: string;
   children?: React.ReactNode;
 }
 
-export function PageHeader({ title, description, children }: PageHeaderProps) {
+export function PageHeader({ title, description, subtitle, children }: PageHeaderProps) {
   return (
     <div className={styles.pageHeader}>
       <h1 className={styles.title}>{title}</h1>
-      {description && <p className={styles.description}>{description}</p>}
+      {(description || subtitle) && <p className={styles.description}>{description || subtitle}</p>}
       {children}
     </div>
   );

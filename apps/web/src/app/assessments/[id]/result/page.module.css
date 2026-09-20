@@ -1,0 +1,135 @@
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  padding: 0;
+}
+
+.backButton:hover {
+  color: var(--primary-color);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  font-size: 2rem;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.scoreGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.scoreCard {
+  text-align: center;
+}
+
+.scoreContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+.scoreIcon {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.scoreIconSuccess {
+  color: var(--success-color, #22c55e);
+  margin-bottom: 1rem;
+}
+
+.scoreIconTime {
+  color: var(--warning-color, #f59e0b);
+  margin-bottom: 1rem;
+}
+
+.scoreValue {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.scoreLabel {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.reviewCard {
+  border: 1px solid var(--warning-color, #f59e0b);
+  background-color: var(--bg-surface);
+  margin-bottom: 1.5rem;
+}
+
+.reviewCard h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: var(--warning-color, #f59e0b);
+}
+
+.reviewCard p {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.warningIcon {
+  color: var(--warning-color, #f59e0b);
+}
+
+.unansweredCard {
+  border: 1px solid var(--error-color, #ef4444);
+  background-color: var(--bg-surface);
+}
+
+.unansweredCard h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: var(--error-color, #ef4444);
+}
+
+.unansweredCard p {
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.errorIcon {
+  color: var(--error-color, #ef4444);
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-secondary);
+}
