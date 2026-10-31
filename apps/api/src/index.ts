@@ -1,3 +1,4 @@
+import * as util from 'util';
 import app from './app';
 import dotenv from 'dotenv';
 
@@ -9,10 +10,10 @@ const PORT = process.env.PORT || 4000;
 const startServer = () => {
   try {
     app.listen(PORT, () => {
-      console.log(`🚀 API Server running on port ${PORT}`);
+      process.stdout.write(util.format(`🚀 API Server running on port ${PORT}`) + "\n");
     });
   } catch (error) {
-    console.error('Failed to start server:', error);
+    process.stderr.write(util.format('Failed to start server:', error) + "\n");
     process.exit(1);
   }
 };

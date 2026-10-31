@@ -1,14 +1,13 @@
+import * as util from 'util';
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
 // Extend Express Request interface to include user
-declare global {
-  namespace Express {
-    interface Request {
-      user?: {
-        id: string;
-      };
-    }
+declare module 'express-serve-static-core' {
+  interface Request {
+    user?: {
+      id: string;
+    };
   }
 }
 
@@ -24,7 +23,7 @@ export const requireAuth = (req: Request, res: Response, next: NextFunction) => 
   try {
     const secret = process.env.JWT_SECRET;
     if (!secret) {
-      console.error('JWT_SECRET is missing from environment');
+      process.stderr.write(util.format('JWT_SECRET is missing from environment') + "\n");
       return res.status(500).json({ error: 'Internal server error' });
     }
 
@@ -34,8 +33,8 @@ export const requireAuth = (req: Request, res: Response, next: NextFunction) => 
     req.user = { id: decoded.id };
     
     next();
-  } catch (error: any) {
-    if (error.name === 'TokenExpiredError') {
+  } catch (error: unknown) {
+    if (error instanceof Error && error.name === 'TokenExpiredError') {
       return res.status(401).json({ error: 'Unauthorized - Token expired' });
     }
     return res.status(401).json({ error: 'Unauthorized - Invalid token' });

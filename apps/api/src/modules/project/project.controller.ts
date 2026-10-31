@@ -1,3 +1,4 @@
+import * as util from 'util';
 import { Request, Response } from 'express';
 import { ProjectService } from './project.service';
 
@@ -9,9 +10,9 @@ export class ProjectController {
       const userId = req.user!.id;
       const projects = await projectService.getProjects(userId);
       res.json(projects);
-    } catch (error: any) {
-      console.error(error);
-      if (error.code === 'P2023') {
+    } catch (error: unknown) {
+      process.stderr.write(util.format(error) + "\n");
+      if ((error as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
       res.status(500).json({ error: 'Failed to fetch projects' });
@@ -24,10 +25,10 @@ export class ProjectController {
       const userId = req.user!.id;
       const project = await projectService.getProjectBySlug(slug, userId);
       res.json(project);
-    } catch (error: any) {
-      console.error(error);
-      if (error.message === 'Project not found') return res.status(404).json({ error: error.message });
-      if (error.code === 'P2023') {
+    } catch (error: unknown) {
+      process.stderr.write(util.format(error) + "\n");
+      if (((error as Error).message || String(error)) === 'Project not found') return res.status(404).json({ error: ((error as Error).message || String(error)) });
+      if ((error as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
       res.status(500).json({ error: 'Failed to fetch project' });
@@ -40,9 +41,9 @@ export class ProjectController {
       const userId = req.user!.id;
       const result = await projectService.updateProjectState(userId, projectId, req.body);
       res.json(result);
-    } catch (error: any) {
-      console.error(error);
-      if (error.code === 'P2023') {
+    } catch (error: unknown) {
+      process.stderr.write(util.format(error) + "\n");
+      if ((error as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
       res.status(500).json({ error: 'Failed to update project state' });
@@ -55,9 +56,9 @@ export class ProjectController {
       const userId = req.user!.id;
       const result = await projectService.updateTaskState(userId, taskId, req.body);
       res.json(result);
-    } catch (error: any) {
-      console.error(error);
-      if (error.code === 'P2023') {
+    } catch (error: unknown) {
+      process.stderr.write(util.format(error) + "\n");
+      if ((error as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
       res.status(500).json({ error: 'Failed to update task state' });
@@ -73,8 +74,8 @@ export class ProjectController {
       const reviewService = new ProjectReviewService();
       const submission = await reviewService.submitProject(userId, projectId, req.body);
       res.json(submission);
-    } catch (error: any) {
-      console.error(error);
+    } catch (error: unknown) {
+      process.stderr.write(util.format(error) + "\n");
       res.status(500).json({ error: 'Failed to submit project' });
     }
   }
@@ -87,8 +88,8 @@ export class ProjectController {
       const reviewService = new ProjectReviewService();
       const review = await reviewService.createReview(submissionId, status, findings);
       res.json(review);
-    } catch (error: any) {
-      console.error(error);
+    } catch (error: unknown) {
+      process.stderr.write(util.format(error) + "\n");
       res.status(500).json({ error: 'Failed to create review' });
     }
   }
@@ -102,8 +103,8 @@ export class ProjectController {
       const reviewService = new ProjectReviewService();
       const defense = await reviewService.startDefense(submissionId, userId, type);
       res.json(defense);
-    } catch (error: any) {
-      console.error(error);
+    } catch (error: unknown) {
+      process.stderr.write(util.format(error) + "\n");
       res.status(500).json({ error: 'Failed to start defense' });
     }
   }
@@ -116,8 +117,8 @@ export class ProjectController {
       const reviewService = new ProjectReviewService();
       const defense = await reviewService.verifyDefense(defenseId, passed);
       res.json(defense);
-    } catch (error: any) {
-      console.error(error);
+    } catch (error: unknown) {
+      process.stderr.write(util.format(error) + "\n");
       res.status(500).json({ error: 'Failed to verify defense' });
     }
   }

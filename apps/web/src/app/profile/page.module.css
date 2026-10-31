@@ -1,0 +1,306 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-6);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.pageHeader { margin-bottom: 0; }
+
+.pageTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-bottom: 4px;
+}
+
+.pageSubtitle {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+
+.loadingState,
+.errorState {
+  text-align: center;
+  padding: 60px;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}
+
+.errorState { color: #dc2626; }
+
+.successBanner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: #dcfce7;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: var(--space-6);
+  align-items: flex-start;
+}
+
+/* Avatar Card */
+.avatarCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: center;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  color: white;
+  font-size: 1.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.displayName {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+.email {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.joinDate {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.goalsList {
+  width: 100%;
+  text-align: left;
+  margin-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.goalsLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-text-muted);
+  margin-bottom: 4px;
+}
+
+.goalItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--color-text-main);
+}
+
+.noGoals {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* Details Card */
+.detailsCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.detailsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detailsTitle {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin: 0;
+}
+
+.editBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  padding: 6px 14px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-main);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.editBtn:hover {
+  background: var(--color-surface-hover);
+}
+
+.editActions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.cancelBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  padding: 6px 14px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.saveBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-primary);
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 6px 16px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.saveBtn:disabled { opacity: 0.7; cursor: not-allowed; }
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+}
+
+.fullWidth { grid-column: 1 / -1; }
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+}
+
+.input {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  font-size: 0.95rem;
+  color: var(--color-text-main);
+  background: var(--color-surface);
+  outline: none;
+  transition: border-color 0.15s;
+  width: 100%;
+}
+
+.input:focus { border-color: var(--color-primary); }
+
+.fieldValue {
+  font-size: 0.95rem;
+  color: var(--color-text-main);
+  padding: var(--space-2) 0;
+  border-bottom: 1px dashed var(--color-border);
+}
+
+.empty { color: var(--color-text-muted); font-style: italic; }
+
+/* Career section */
+.careerSection {
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-5);
+}
+
+.careerTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin-bottom: var(--space-4);
+}
+
+.careerGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.careerItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.careerLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+}
+
+.careerValue {
+  font-size: 0.9rem;
+  color: var(--color-text-main);
+}
+
+.resume_READY { color: #16a34a; }
+.resume_NEEDS_UPDATE { color: #d97706; }
+.resume_REVIEWING { color: #3b82f6; }
+
+@media (max-width: 768px) {
+  .layout { grid-template-columns: 1fr; }
+  .formGrid { grid-template-columns: 1fr; }
+  .careerGrid { grid-template-columns: 1fr; }
+}

@@ -1,3 +1,4 @@
+import * as util from 'util';
 import { Request, Response } from 'express';
 import { InterviewService } from './interview.service';
 
@@ -9,9 +10,9 @@ export class InterviewController {
       const userId = req.user!.id;
       const readiness = await interviewService.getReadiness(userId);
       res.json(readiness);
-    } catch (error: any) {
-      console.error(error);
-      if (error.code === 'P2023') {
+    } catch (error: unknown) {
+      process.stderr.write(util.format(error) + "\n");
+      if ((error as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
       res.status(500).json({ error: 'Failed to fetch interview readiness' });
@@ -23,9 +24,9 @@ export class InterviewController {
       const userId = req.user!.id;
       const queue = await interviewService.getAdaptiveQueue(userId);
       res.json(queue);
-    } catch (error: any) {
-      console.error(error);
-      if (error.code === 'P2023') {
+    } catch (error: unknown) {
+      process.stderr.write(util.format(error) + "\n");
+      if ((error as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
       res.status(500).json({ error: 'Failed to fetch adaptive queue' });
@@ -37,9 +38,9 @@ export class InterviewController {
       const userId = req.user!.id;
       const session = await interviewService.generateMockSession(userId, req.body);
       res.json(session);
-    } catch (error: any) {
-      console.error(error);
-      if (error.code === 'P2023') {
+    } catch (error: unknown) {
+      process.stderr.write(util.format(error) + "\n");
+      if ((error as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
       res.status(500).json({ error: 'Failed to generate mock session' });
@@ -52,9 +53,9 @@ export class InterviewController {
       const userId = req.user!.id;
       const result = await interviewService.evaluateMockSession(id, userId);
       res.json(result);
-    } catch (error: any) {
-      console.error(error);
-      if (error.code === 'P2023') {
+    } catch (error: unknown) {
+      process.stderr.write(util.format(error) + "\n");
+      if ((error as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
       res.status(500).json({ error: 'Failed to evaluate mock session' });

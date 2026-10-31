@@ -1,3 +1,4 @@
+import * as util from 'util';
 import { Request, Response } from 'express';
 import { AssessmentService } from './assessment.service';
 
@@ -9,12 +10,12 @@ export class AssessmentController {
     try {
       const assessments = await assessmentService.getAssessments();
       res.json(assessments);
-    } catch (e: any) {
-      console.error(e);
-      if (e.code === 'P2023') {
+    } catch (e: unknown) {
+      process.stderr.write(util.format(e) + "\n");
+      if ((e as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
-      res.status(500).json({ error: e.message });
+      res.status(500).json({ error: 'Failed to fetch assessments' });
     }
   }
 
@@ -22,62 +23,62 @@ export class AssessmentController {
     try {
       const assessment = await assessmentService.getAssessment(req.params.id);
       res.json(assessment);
-    } catch (e: any) {
-      console.error(e);
-      if (e.code === 'P2023') {
+    } catch (e: unknown) {
+      process.stderr.write(util.format(e) + "\n");
+      if ((e as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
-      res.status(500).json({ error: e.message });
+      res.status(500).json({ error: 'Failed to fetch assessment' });
     }
   }
 
   async startAttempt(req: Request, res: Response) {
     try {
-      // Mock auth for now
-      const userId = '66eb4b14d5162a84cc7852a1'; 
+
+      const userId = req.user!.id; 
       const attempt = await assessmentService.startAttempt(req.params.id, userId);
       res.json(attempt);
-    } catch (e: any) {
-      console.error(e);
-      if (e.code === 'P2023') {
+    } catch (e: unknown) {
+      process.stderr.write(util.format(e) + "\n");
+      if ((e as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
-      res.status(500).json({ error: e.message });
+      res.status(500).json({ error: 'Failed to start attempt' });
     }
   }
 
   async getActiveAttempt(req: Request, res: Response) {
     try {
-      const userId = '66eb4b14d5162a84cc7852a1';
+      const userId = req.user!.id;
       // The startAttempt logic acts as get or create active attempt.
       const attempt = await assessmentService.startAttempt(req.params.id, userId);
       res.json(attempt);
-    } catch (e: any) {
-      console.error(e);
-      if (e.code === 'P2023') {
+    } catch (e: unknown) {
+      process.stderr.write(util.format(e) + "\n");
+      if ((e as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
-      res.status(500).json({ error: e.message });
+      res.status(500).json({ error: 'Failed to get active attempt' });
     }
   }
 
   async getAttempt(req: Request, res: Response) {
     try {
-      const userId = '66eb4b14d5162a84cc7852a1'; 
+      const userId = req.user!.id; 
       const attempt = await assessmentService.getAttempt(req.params.attemptId, userId);
       res.json(attempt);
-    } catch (e: any) {
-      console.error(e);
-      if (e.code === 'P2023') {
+    } catch (e: unknown) {
+      process.stderr.write(util.format(e) + "\n");
+      if ((e as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
-      res.status(500).json({ error: e.message });
+      res.status(500).json({ error: 'Failed to get attempt' });
     }
   }
 
   async recordProblemResult(req: Request, res: Response) {
     try {
-      const userId = '66eb4b14d5162a84cc7852a1'; 
+      const userId = req.user!.id; 
       const { problemId, status, hintsUsed, timeSpent } = req.body;
       const result = await assessmentService.recordProblemResult(
         req.params.attemptId, 
@@ -88,40 +89,40 @@ export class AssessmentController {
         timeSpent
       );
       res.json(result);
-    } catch (e: any) {
-      console.error(e);
-      if (e.code === 'P2023') {
+    } catch (e: unknown) {
+      process.stderr.write(util.format(e) + "\n");
+      if ((e as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
-      res.status(500).json({ error: e.message });
+      res.status(500).json({ error: 'Failed to record problem result' });
     }
   }
 
   async submitAttempt(req: Request, res: Response) {
     try {
-      const userId = '66eb4b14d5162a84cc7852a1'; 
+      const userId = req.user!.id; 
       const attempt = await assessmentService.submitAttempt(req.params.attemptId, userId);
       res.json(attempt);
-    } catch (e: any) {
-      console.error(e);
-      if (e.code === 'P2023') {
+    } catch (e: unknown) {
+      process.stderr.write(util.format(e) + "\n");
+      if ((e as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
-      res.status(500).json({ error: e.message });
+      res.status(500).json({ error: 'Failed to submit attempt' });
     }
   }
 
   async getUserHistory(req: Request, res: Response) {
     try {
-      const userId = '66eb4b14d5162a84cc7852a1'; 
+      const userId = req.user!.id; 
       const history = await assessmentService.getUserHistory(userId);
       res.json(history);
-    } catch (e: any) {
-      console.error(e);
-      if (e.code === 'P2023') {
+    } catch (e: unknown) {
+      process.stderr.write(util.format(e) + "\n");
+      if ((e as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
-      res.status(500).json({ error: e.message });
+      res.status(500).json({ error: 'Failed to get user history' });
     }
   }
 }

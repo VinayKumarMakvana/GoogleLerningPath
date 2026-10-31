@@ -1,3 +1,4 @@
+import * as util from 'util';
 import { Request, Response } from 'express';
 import { ProgressService } from './progress.service';
 
@@ -9,9 +10,9 @@ export class ProgressController {
       const userId = req.user!.id;
       const data = await progressService.getIntelligence(userId);
       res.json(data);
-    } catch (error: any) {
-      console.error(error);
-      if (error.code === 'P2023') {
+    } catch (error: unknown) {
+      process.stderr.write(util.format(error) + "\n");
+      if ((error as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
       res.status(500).json({ error: 'Failed to fetch progress intelligence' });
@@ -23,9 +24,9 @@ export class ProgressController {
       const userId = req.user!.id;
       const queue = await progressService.getRevisionQueue(userId);
       res.json(queue);
-    } catch (error: any) {
-      console.error(error);
-      if (error.code === 'P2023') {
+    } catch (error: unknown) {
+      process.stderr.write(util.format(error) + "\n");
+      if ((error as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
       res.status(500).json({ error: 'Failed to fetch revision queue' });

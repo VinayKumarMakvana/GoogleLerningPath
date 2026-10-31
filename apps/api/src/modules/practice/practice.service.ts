@@ -3,11 +3,11 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export class PracticeService {
-  async getProblems(filters: any) {
+  async getProblems(filters: { page?: number; limit?: number; difficulty?: string; platform?: string; pattern?: string; topic?: string; tag?: string }) {
     const { page = 1, limit = 20, difficulty, platform, pattern, topic, tag } = filters;
     const skip = (page - 1) * limit;
 
-    const where: any = { status: 'PUBLISHED' };
+    const where: Record<string, unknown> = { status: 'PUBLISHED' };
 
     if (difficulty) where.difficulty = difficulty.toUpperCase();
     if (platform) where.platform = platform.toUpperCase();
@@ -168,19 +168,19 @@ export class PracticeService {
 
     let newInterval = 1; // default 1 day
     
-    if (attempt.status === 'SOLVED' && attempt.reviewState === 'SOLVED_CONFIDENTLY') {
+    if ((attempt as any).status === 'SOLVED' && attempt.reviewState === 'SOLVED_CONFIDENTLY') {
       newInterval = state?.reviewInterval ? state.reviewInterval * 2 : 2;
-    } else if (attempt.status === 'FAILED' || attempt.reviewState === 'STRUGGLED') {
+    } else if ((attempt as any).status === 'FAILED' || attempt.reviewState === 'STRUGGLED') {
       newInterval = 1;
-    } else if (attempt.status === 'SOLVED' && attempt.hintsUsed > 0) {
+    } else if ((attempt as any).status === 'SOLVED' && attempt.hintsUsed > 0) {
       newInterval = Math.max(1, (state?.reviewInterval || 2) - 1);
     }
 
     const nextReview = new Date();
     nextReview.setDate(nextReview.getDate() + newInterval);
 
-    let problemStatus = attempt.status;
-    if (attempt.reviewState === 'NEEDS_REVIEW' || attempt.reviewState === 'STRUGGLED' || attempt.status === 'FAILED') {
+    let problemStatus = (attempt as any).status;
+    if (attempt.reviewState === 'NEEDS_REVIEW' || attempt.reviewState === 'STRUGGLED' || (attempt as any).status === 'FAILED') {
       problemStatus = 'NEEDS_REVIEW';
     }
 

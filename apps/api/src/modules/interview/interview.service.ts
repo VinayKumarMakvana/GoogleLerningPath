@@ -1,3 +1,4 @@
+import { Prisma } from '@prisma/client';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -60,7 +61,7 @@ export class InterviewService {
   }
 
   async getAdaptiveQueue(userId: string) {
-    const queue: any[] = [];
+    const queue: { title: string; reason: string; estimatedMinutes: number; priority: number; url: string; }[] = [];
     
     // 1. Check for overdue reviews (Top Priority)
     const { ProgressService } = await import('../progress/progress.service');
@@ -92,9 +93,9 @@ export class InterviewService {
     return queue.sort((a, b) => a.priority - b.priority);
   }
 
-  async generateMockSession(userId: string, data: any) {
+  async generateMockSession(userId: string, data: { difficulty?: string, patterns?: string[] }) {
     const { difficulty, patterns } = data; 
-    const problemQuery: any = { status: 'PUBLISHED' };
+    const problemQuery: Prisma.PracticeProblemWhereInput = { status: 'PUBLISHED' };
     
     if (difficulty) {
       problemQuery.difficulty = difficulty.toUpperCase();

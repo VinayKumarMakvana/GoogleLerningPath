@@ -1,3 +1,4 @@
+import * as util from 'util';
 import { Request, Response } from 'express';
 import { CareerService } from './career.service';
 
@@ -9,9 +10,9 @@ export class CareerController {
       const userId = req.user!.id;
       const data = await careerService.getCareerDashboard(userId);
       res.json(data);
-    } catch (error: any) {
-      console.error(error);
-      if (error.code === 'P2023') {
+    } catch (error: unknown) {
+      process.stderr.write(util.format(error) + "\n");
+      if ((error as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
       res.status(500).json({ error: 'Failed to fetch career dashboard' });
@@ -23,9 +24,9 @@ export class CareerController {
       const userId = req.user!.id;
       const result = await careerService.updateCareerProfile(userId, req.body);
       res.json(result);
-    } catch (error: any) {
-      console.error(error);
-      if (error.code === 'P2023') {
+    } catch (error: unknown) {
+      process.stderr.write(util.format(error) + "\n");
+      if ((error as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
       res.status(500).json({ error: 'Failed to update career profile' });
@@ -37,9 +38,9 @@ export class CareerController {
       const userId = req.user!.id;
       const apps = await careerService.getApplications(userId);
       res.json(apps);
-    } catch (error: any) {
-      console.error(error);
-      if (error.code === 'P2023') {
+    } catch (error: unknown) {
+      process.stderr.write(util.format(error) + "\n");
+      if ((error as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
       res.status(500).json({ error: 'Failed to fetch applications' });
@@ -52,10 +53,10 @@ export class CareerController {
       const userId = req.user!.id;
       const app = await careerService.getApplication(id, userId);
       res.json(app);
-    } catch (error: any) {
-      console.error(error);
-      if (error.message === 'Application not found') return res.status(404).json({ error: error.message });
-      if (error.code === 'P2023') {
+    } catch (error: unknown) {
+      process.stderr.write(util.format(error) + "\n");
+      if (((error as Error).message || String(error)) === 'Application not found') return res.status(404).json({ error: ((error as Error).message || String(error)) });
+      if ((error as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
       res.status(500).json({ error: 'Failed to fetch application' });
@@ -67,9 +68,9 @@ export class CareerController {
       const userId = req.user!.id;
       const result = await careerService.createApplication(userId, req.body);
       res.json(result);
-    } catch (error: any) {
-      console.error(error);
-      if (error.code === 'P2023') {
+    } catch (error: unknown) {
+      process.stderr.write(util.format(error) + "\n");
+      if ((error as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
       res.status(500).json({ error: 'Failed to create application' });
@@ -82,9 +83,9 @@ export class CareerController {
       const userId = req.user!.id;
       const result = await careerService.updateApplication(userId, id, req.body);
       res.json(result);
-    } catch (error: any) {
-      console.error(error);
-      if (error.code === 'P2023') {
+    } catch (error: unknown) {
+      process.stderr.write(util.format(error) + "\n");
+      if ((error as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
       res.status(500).json({ error: 'Failed to update application' });

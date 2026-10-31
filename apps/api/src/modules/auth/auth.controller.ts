@@ -1,3 +1,4 @@
+import * as util from 'util';
 import { Request, Response } from 'express';
 import { AuthService } from './auth.service';
 
@@ -9,10 +10,10 @@ export class AuthController {
       const { email, password } = req.body;
       const result = await authService.register(email, password);
       res.status(201).json(result);
-    } catch (error: any) {
-      console.error('[AuthController.register]', error);
-      if (error.message === 'Email and password are required' || error.message === 'User already exists') {
-        return res.status(400).json({ error: error.message });
+    } catch (error: unknown) {
+      process.stderr.write(util.format('[AuthController.register]', error) + "\n");
+      if (((error as Error).message || String(error)) === 'Email and password are required' || ((error as Error).message || String(error)) === 'User already exists') {
+        return res.status(400).json({ error: ((error as Error).message || String(error)) });
       }
       res.status(500).json({ error: 'Internal server error' });
     }
@@ -23,10 +24,10 @@ export class AuthController {
       const { email, password } = req.body;
       const result = await authService.login(email, password);
       res.json(result);
-    } catch (error: any) {
-      console.error('[AuthController.login]', error);
-      if (error.message === 'Invalid credentials' || error.message === 'Email and password are required') {
-        return res.status(401).json({ error: error.message });
+    } catch (error: unknown) {
+      process.stderr.write(util.format('[AuthController.login]', error) + "\n");
+      if (((error as Error).message || String(error)) === 'Invalid credentials' || ((error as Error).message || String(error)) === 'Email and password are required') {
+        return res.status(401).json({ error: ((error as Error).message || String(error)) });
       }
       res.status(500).json({ error: 'Internal server error' });
     }

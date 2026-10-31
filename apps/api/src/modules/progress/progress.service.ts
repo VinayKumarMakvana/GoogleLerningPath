@@ -87,7 +87,7 @@ export class ProgressService {
       })
     ]);
 
-    const queue: any[] = [];
+    const queue: { id: string; title: string; reason: string; type: string; priority: number; estimatedMinutes: number; url: string }[] = [];
 
     // Priority 1: Overdue reviews
     states.forEach(state => {

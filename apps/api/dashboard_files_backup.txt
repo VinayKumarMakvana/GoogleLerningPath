@@ -1,0 +1,818 @@
+--- FOUND C:/Users/VINAY/OneDrive/Desktop/google/apps/web/src/app/dashboard/page.module.css ---
+.grid {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.mainColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.sideColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.welcomeCard {
+  background: linear-gradient(135deg, var(--color-primary-light), var(--color-surface));
+  border: 1px solid var(--color-primary-light);
+}
+
+.planList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.planItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-3);
+  background-color: var(--color-surface-hover);
+  border-radius: var(--radius-md);
+}
+
+.planTitle {
+  font-weight: 500;
+}
+
+.planTime {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+
+.quickActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+--- FOUND C:/Users/VINAY/OneDrive/Desktop/google/apps/web/src/app/dashboard/page.tsx ---
+import React from 'react';
+import { PageHeader, SectionHeader } from '@/components/shared/Headers';
+import { Card, CardHeader, CardContent } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
+import { ProgressBar } from '@/components/ui/ProgressBar';
+import { Badge } from '@/components/ui/Badge';
+import { PlayCircle, Target, AlertCircle, Calendar } from 'lucide-react';
+import styles from './page.module.css';
+
+export default function DashboardPage() {
+  return (
+    <>
+      <PageHeader 
+        title="Dashboard" 
+        description="Good morning. Continue your Google SWE preparation."
+      />
+      
+      <div className={styles.grid}>
+        <div className={styles.mainColumn}>
+          {/* Continue Learning */}
+          <section>
+            <SectionHeader title="Continue Learning" />
+            <Card className={styles.welcomeCard}>
+              <CardContent>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div>
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: '8px' }}>Binary Search — Search Space</h3>
+                    <div style={{ display: 'flex', gap: '16px', color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>
+                      <span>Topic: Binary Search</span>
+                      <span>Estimated: 45 min</span>
+                    </div>
+                  </div>
+                  <Button size="lg" className={styles.continueBtn}>
+                    <PlayCircle size={20} /> Resume
+                  </Button>
+                </div>
+                <div style={{ marginTop: '24px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem', marginBottom: '8px' }}>
+                    <span>Module Progress</span>
+                    <span>65%</span>
+                  </div>
+                  <ProgressBar progress={65} />
+                </div>
+              </CardContent>
+            </Card>
+          </section>
+
+          {/* Today's Plan */}
+          <section>
+            <SectionHeader title="Today's Plan" />
+            <Card>
+              <CardContent>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                  <span style={{ fontWeight: 500 }}>Target: 3 hours</span>
+                  <Badge variant="primary">On Track</Badge>
+                </div>
+                <ProgressBar progress={30} size="sm" />
+                
+                <div className={styles.planList}>
+                  <div className={styles.planItem}>
+                    <span className={styles.planTitle}>DSA Practice</span>
+                    <span className={styles.planTime}>75 min</span>
+                  </div>
+                  <div className={styles.planItem}>
+                    <span className={styles.planTitle}>CS / Development</span>
+                    <span className={styles.planTime}>75 min</span>
+                  </div>
+                  <div className={styles.planItem}>
+                    <span className={styles.planTitle}>System Design</span>
+                    <span className={styles.planTime}>30 min</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </section>
+        </div>
+
+        <div className={styles.sideColumn}>
+          {/* Current Roadmap Context */}
+          <section>
+            <SectionHeader title="Current Roadmap" />
+            <Card>
+              <CardContent>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+                  <Target size={24} color="var(--color-primary)" />
+                  <div>
+                    <div style={{ fontWeight: 500 }}>Phase 2: Core DSA</div>
+                    <div style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)' }}>Module: Advanced Trees</div>
+                  </div>
+                </div>
+                <Button variant="outline" style={{ width: '100%' }}>View Full Roadmap</Button>
+              </CardContent>
+            </Card>
+          </section>
+
+          {/* Weak Areas */}
+          <section>
+            <SectionHeader title="Needs Attention" />
+            <Card>
+              <CardContent>
+                <ul style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  <li style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--color-warning)' }}>
+                    <AlertCircle size={16} />
+                    <span style={{ color: 'var(--color-text-main)', fontSize: '0.875rem' }}>Graphs (DFS/BFS)</span>
+                  </li>
+                  <li style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--color-warning)' }}>
+                    <AlertCircle size={16} />
+                    <span style={{ color: 'var(--color-text-main)', fontSize: '0.875rem' }}>DBMS Transactions</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+          </section>
+
+          {/* Upcoming */}
+          <section>
+            <SectionHeader title="Upcoming" />
+            <Card>
+              <CardContent>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                  <Calendar size={20} color="var(--color-text-muted)" style={{ marginTop: '2px' }} />
+                  <div>
+                    <div style={{ fontWeight: 500, fontSize: '0.875rem' }}>Mock Interview</div>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>Tomorrow, 10:00 AM</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </section>
+          
+          {/* Quick Actions */}
+          <section>
+            <SectionHeader title="Quick Actions" />
+            <div className={styles.quickActions}>
+              <Button variant="outline">Practice</Button>
+              <Button variant="outline">Revise</Button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </>
+  );
+}
+--- FOUND C:\Users\VINAY\OneDrive\Desktop\google\apps\web\src\app\dashboard\page.tsx ---
+"use client";
+
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { Card, CardContent } from '@/components/ui/Card';
+import { 
+  BookOpen, Code2, FolderGit2, MessageSquare, 
+  Flame, Target, Zap, Clock, CheckCircle, Disc
+} from 'lucide-react';
+import styles from './page.module.css';
+
+import { careerApi } from '@/services/careerApi';
+import { plannerApi, DailyPlan } from '@/services/plannerApi';
+import { progressApi } from '@/services/progressApi';
+
+export default function DashboardPage() {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  
+  const [careerData, setCareerData] = useState<any>(null);
+  const [todayPlan, setTodayPlan] = useState<DailyPlan | null>(null);
+  const [progressInt, setProgressInt] = useState<any>(null);
+
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const [career, plan, progress] = await Promise.all([
+          careerApi.getDashboard().catch(() => null),
+          plannerApi.getTodayPlan().catch(() => null),
+          progressApi.getIntelligence().catch(() => null)
+        ]);
+        
+        setCareerData(career);
+        setTodayPlan(plan);
+        setProgressInt(progress);
+      } catch (err: any) {
+        setError(err.message || 'Failed to load dashboard data');
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div style={{ padding: '40px', textAlign: 'center', color: 'var(--color-text-muted)' }}>
+        Loading your command center...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div style={{ padding: '40px', color: 'var(--color-error)' }}>
+        {error}
+      </div>
+    );
+  }
+
+  const { profile } = careerData || {};
+  const firstName = profile?.firstName || 'Learner';
+
+  // Metrics from actual data (fallback to 0)
+  const topicsCompleted = progressInt?.curriculum?.completedTopics || 0; 
+  const problemsCompleted = progressInt?.practice?.solvedProblems || 0; 
+  const projectsCompleted = progressInt?.projects?.completed || 0; 
+  const assessmentsCompleted = progressInt?.assessment?.completed || 0;
+  
+  // Real percentage
+  const overallPercentage = progressInt?.overall?.percentage || 0;
+  
+  // Calculate segments for the donut chart. Max 100 for visual appeal, but we want multiple colors to show.
+  // The design shows 4 segments. Let's make them proportional to the overall percentage.
+  const dsaPct = Math.min(overallPercentage * 1.2, 100);
+  const backendPct = overallPercentage;
+  const sysDesignPct = Math.max(overallPercentage * 0.8, 0);
+  const aiMlPct = Math.max(overallPercentage * 0.5, 0);
+  
+  // A mock streak value for now since it's not in the intelligence API yet
+  const streak = 12;
+  
+  const formattedDate = new Date().toLocaleDateString('en-US', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+
+  return (
+    <div className={styles.dashboardContainer}>
+      {/* 1. Welcome Header Area (Top Row) */}
+      <div className={styles.welcomeHeader}>
+        <div className={styles.welcomeTextGroup}>
+          <h1 className={styles.welcomeTitle}>Welcome back, {firstName}!</h1>
+          <p className={styles.welcomeSubtitle}>"Consistent learning today, a better tomorrow."</p>
+        </div>
+        
+        <div className={styles.headerRightArea}>
+          <div className={styles.headerDate}>{formattedDate}</div>
+          <div className={styles.streakWidget}>
+            <div className={styles.streakIconWrapper}>
+              <Flame size={18} color="#ef4444" fill="#ef4444" />
+            </div>
+            <div>
+              <div className={styles.streakNumber}>{streak} Days</div>
+              <div className={styles.streakLabel}>Day Streak</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 2. Metrics Row (5 Cards - Compact) */}
+      <div className={styles.metricRow}>
+        <div className={styles.metricItem}>
+          <div className={styles.metricIconBox} style={{ color: '#10b981', backgroundColor: '#ecfdf5' }}>
+            <BookOpen size={20} />
+          </div>
+          <div className={styles.metricContent}>
+            <div className={styles.metricValue}>{topicsCompleted}</div>
+            <div className={styles.metricLabel}>Topics</div>
+          </div>
+        </div>
+        
+        <div className={styles.metricItem}>
+          <div className={styles.metricIconBox} style={{ color: '#3b82f6', backgroundColor: '#eff6ff' }}>
+            <Code2 size={20} />
+          </div>
+          <div className={styles.metricContent}>
+            <div className={styles.metricValue}>{problemsCompleted}</div>
+            <div className={styles.metricLabel}>Problems</div>
+          </div>
+        </div>
+        
+        <div className={styles.metricItem}>
+          <div className={styles.metricIconBox} style={{ color: '#8b5cf6', backgroundColor: '#f5f3ff' }}>
+            <Target size={20} />
+          </div>
+          <div className={styles.metricContent}>
+            <div className={styles.metricValue}>{assessmentsCompleted}</div>
+            <div className={styles.metricLabel}>Assessments</div>
+          </div>
+        </div>
+        
+        <div className={styles.metricItem}>
+          <div className={styles.metricIconBox} style={{ color: '#10b981', backgroundColor: '#ecfdf5' }}>
+            <FolderGit2 size={20} />
+          </div>
+          <div className={styles.metricContent}>
+            <div className={styles.metricValue}>{projectsCompleted}</div>
+            <div className={styles.metricLabel}>Projects</div>
+          </div>
+        </div>
+        
+        <div className={styles.metricItem}>
+          <div className={styles.metricIconBox} style={{ color: '#3b82f6', backgroundColor: '#eff6ff' }}>
+            <MessageSquare size={20} />
+          </div>
+          <div className={styles.metricContent}>
+            <div className={styles.metricValue}>86</div>
+            <div className={styles.metricLabel}>Q&As</div>
+          </div>
+        </div>
+      </div>
+
+      {/* 3. Main Dashboard Grid (2 Columns) */}
+      <div className={styles.grid}>
+        
+        {/* LEFT COLUMN */}
+        <div className={styles.column}>
+          <section>
+            <div className={styles.sectionHeader}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <CheckCircle size={20} color="var(--color-primary)" />
+                <h2 className={styles.sectionTitle}>Today's Study Plan</h2>
+              </div>
+              <Link href="/study-plan" className={styles.viewAll}>View All</Link>
+            </div>
+            
+            <Card style={{ padding: '0', overflow: 'hidden' }}>
+              <CardContent style={{ padding: '0' }}>
+                <ul className={styles.taskList}>
+                  
+                  {todayPlan && todayPlan.tasks && todayPlan.tasks.length > 0 ? (
+                    todayPlan.tasks.map((task) => {
+                      let bg = '#10b981';
+                      let color = '#ecfdf5';
+                      let text = '#10b981';
+                      let actionText = 'Start';
+                      let actionBg = 'var(--color-primary)';
+                      let actionColor = 'white';
+                      let actionBorder = 'none';
+
+                      if (task.type === 'PRACTICE') {
+                        actionBg = '#f8fafc';
+                        actionColor = 'var(--color-text-main)';
+                        actionBorder = '1px solid var(--color-border)';
+                        actionText = 'Practice';
+                      } else if (task.type === 'ASSESSMENT') {
+                        bg = '#3b82f6';
+                        color = '#eff6ff';
+                        text = '#3b82f6';
+                        actionBg = '#f8fafc';
+                        actionColor = 'var(--color-text-main)';
+                        actionBorder = '1px solid var(--color-border)';
+                      } else if (task.type === 'LEARN') {
+                        actionText = 'Continue';
+                      } else if (task.type === 'REVIEW') {
+                        actionText = 'Review';
+                      }
+
+                      return (
+                        <li key={task.id} className={styles.taskItem}>
+                          <div className={styles.taskItemIndicator} style={{ backgroundColor: bg }} />
+                          <div className={styles.taskInfo}>
+                            <div className={styles.taskTitleRow}>
+                              <span className={styles.taskTitle}>{task.title}</span>
+                              <span className={styles.taskBadge} style={{ backgroundColor: color, color: text }}>
+                                {task.type.charAt(0) + task.type.slice(1).toLowerCase()}
+                              </span>
+                            </div>
+                            <div className={styles.taskSubtitle}>
+                              {task.metadata?.topic || 'General'} • {task.duration} min
+                            </div>
+                          </div>
+                          <button className={styles.taskAction} style={{ backgroundColor: actionBg, color: actionColor, border: actionBorder }}>
+                            {actionText}
+                          </button>
+                        </li>
+                      );
+                    })
+                  ) : (
+                    <li className={styles.taskItem}>
+                      <div className={styles.taskInfo} style={{ padding: '20px' }}>
+                        <span className={styles.taskTitle}>No tasks for today!</span>
+                        <div className={styles.taskSubtitle}>Take a break or generate a new study plan.</div>
+                      </div>
+                    </li>
+                  )}
+                </ul>
+              </CardContent>
+            </Card>
+          </section>
+        </div>
+
+        {/* RIGHT COLUMN */}
+        <div className={styles.column}>
+          <section>
+            <div className={styles.sectionHeader}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Disc size={20} color="var(--color-primary)" />
+                <h2 className={styles.sectionTitle}>Learning Progress</h2>
+              </div>
+              <Link href="/progress" className={styles.viewAll}>View All</Link>
+            </div>
+            
+            <Card style={{ padding: '24px 0' }}>
+              <CardContent>
+                <div className={styles.donutChartContainer}>
+                  
+                  {/* Left: Donut Chart visual approximation using CSS */}
+                  <div className={styles.donutChartWrapper}>
+                    <svg viewBox="0 0 100 100" className={styles.donutSvg}>
+                      {/* Background circle */}
+                      <circle cx="50" cy="50" r="36" stroke="#f1f5f9" strokeWidth="16" fill="none" />
+                      
+                      {/* Segment 3 (AI/ML) */}
+                      <circle cx="50" cy="50" r="36" stroke="#8b5cf6" strokeWidth="16" fill="none" strokeDasharray="226" strokeDashoffset={226 - (226 * (aiMlPct/100))} transform="rotate(-90 50 50)" />
+                      
+                      {/* Segment 2 (Backend) */}
+                      <circle cx="50" cy="50" r="36" stroke="#3b82f6" strokeWidth="16" fill="none" strokeDasharray="226" strokeDashoffset={226 - (226 * (backendPct/100))} transform="rotate(-90 50 50)" />
+                      
+                      {/* Segment 1 (DSA) */}
+                      <circle cx="50" cy="50" r="36" stroke="var(--color-primary)" strokeWidth="16" fill="none" strokeDasharray="226" strokeDashoffset={226 - (226 * (dsaPct/100))} transform="rotate(-90 50 50)" />
+                    </svg>
+                    <div className={styles.donutLabel}>
+                      <span className={styles.donutPercentage}>{overallPercentage}%</span>
+                    </div>
+                  </div>
+                  
+                  {/* Right: Legends */}
+                  <div className={styles.donutLegends}>
+                    <div className={styles.legendItem}>
+                      <div className={styles.legendDot} style={{ backgroundColor: 'var(--color-primary)' }} />
+                      <span>DSA</span>
+                    </div>
+                    <div className={styles.legendItem}>
+                      <div className={styles.legendDot} style={{ backgroundColor: '#3b82f6' }} />
+                      <span>Backend</span>
+                    </div>
+                    <div className={styles.legendItem}>
+                      <div className={styles.legendDot} style={{ backgroundColor: '#8b5cf6' }} />
+                      <span>System Design</span>
+                    </div>
+                    <div className={styles.legendItem}>
+                      <div className={styles.legendDot} style={{ backgroundColor: '#ef4444' }} />
+                      <span>AI/ML</span>
+                    </div>
+                    <div className={styles.legendItem}>
+                      <div className={styles.legendDot} style={{ backgroundColor: '#f59e0b' }} />
+                      <span>Interview</span>
+                    </div>
+                  </div>
+                  
+                </div>
+              </CardContent>
+            </Card>
+          </section>
+        </div>
+      </div>
+    </div>
+  );
+}
+--- FOUND C:\Users\VINAY\OneDrive\Desktop\google\apps\api\src\modules\dashboard\dashboard.service.ts ---
+import { CareerService } from '../career/career.service';
+import { PlannerService } from '../planner/planner.service';
+import { ProgressService } from '../progress/progress.service';
+import { PriorityEngineService } from '../mentor/priority-engine.service';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
+export class DashboardService {
+  private careerService: CareerService;
+  private plannerService: PlannerService;
+  private progressService: ProgressService;
+  private priorityEngine: PriorityEngineService;
+
+  constructor() {
+    this.careerService = new CareerService();
+    this.plannerService = new PlannerService();
+    this.progressService = new ProgressService();
+    this.priorityEngine = new PriorityEngineService();
+  }
+
+  async getDashboard(userId: string) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const [
+      careerDashboard,
+      todayPlan,
+      progressIntelligence,
+      topicsProgress,
+      rankedActions,
+      recentPracticeAttempts
+    ] = await Promise.all([
+      this.careerService.getCareerDashboard(userId),
+      this.plannerService.getTodayPlan(userId),
+      this.progressService.getIntelligence(userId),
+      this.progressService.getTopicsProgress(userId),
+      this.priorityEngine.getRankedActions(userId),
+      prisma.practiceAttempt.findMany({
+        where: { userId },
+        orderBy: { updatedAt: 'desc' },
+        take: 30
+      })
+    ]);
+
+    // Calculate a derived streak from practice attempts + progress updates
+    let currentStreak = 0;
+    // For a real streak, we would look at consecutive days in the database where an action occurred.
+    // We can do a basic calculation here using recent practice attempts.
+    if (recentPracticeAttempts.length > 0) {
+      const dates = new Set(recentPracticeAttempts.map(a => {
+        const d = new Date(a.updatedAt);
+        d.setHours(0, 0, 0, 0);
+        return d.getTime();
+      }));
+      
+      let d = new Date();
+      d.setHours(0, 0, 0, 0);
+      
+      // If the user practiced today or yesterday, streak continues
+      if (dates.has(d.getTime())) {
+        currentStreak++;
+        d.setDate(d.getDate() - 1);
+        while (dates.has(d.getTime())) {
+          currentStreak++;
+          d.setDate(d.getDate() - 1);
+        }
+      } else {
+        d.setDate(d.getDate() - 1);
+        if (dates.has(d.getTime())) {
+          currentStreak++;
+          d.setDate(d.getDate() - 1);
+          while (dates.has(d.getTime())) {
+            currentStreak++;
+            d.setDate(d.getDate() - 1);
+          }
+        }
+      }
+    }
+
+    // Determine Q&As (mocking to 0 since there is no table)
+    const qaCount = 0;
+
+    return {
+      profile: careerDashboard.profile,
+      todayPlan,
+      progress: progressIntelligence,
+      topicsProgress,
+      mentorRecommendations: rankedActions.slice(0, 3), // Top 3 priority actions
+      careerReadiness: careerDashboard.careerReadiness,
+      streak: currentStreak,
+      qAndA: qaCount
+    };
+  }
+}
+
+--- FOUND C:\Users\VINAY\OneDrive\Desktop\google\apps\api\src\modules\dashboard\dashboard.service.ts ---
+import { CareerService } from '../career/career.service';
+import { PlannerService } from '../planner/planner.service';
+import { ProgressService } from '../progress/progress.service';
+import { PriorityEngineService } from '../mentor/priority-engine.service';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
+export class DashboardService {
+  private careerService: CareerService;
+  private plannerService: PlannerService;
+  private progressService: ProgressService;
+  private priorityEngine: PriorityEngineService;
+
+  constructor() {
+    this.careerService = new CareerService();
+    this.plannerService = new PlannerService();
+    this.progressService = new ProgressService();
+    this.priorityEngine = new PriorityEngineService();
+  }
+
+  async getDashboard(userId: string) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const [
+      careerDashboard,
+      todayPlan,
+      progressIntelligence,
+      topicsProgress,
+      rankedActions,
+      recentPracticeAttempts
+    ] = await Promise.all([
+      this.careerService.getCareerDashboard(userId),
+      this.plannerService.getTodayPlan(userId),
+      this.progressService.getIntelligence(userId),
+      this.progressService.getTopicsProgress(userId),
+      this.priorityEngine.getRankedActions(userId),
+      prisma.practiceAttempt.findMany({
+        where: { userId },
+        orderBy: { updatedAt: 'desc' },
+        take: 30
+      })
+    ]);
+
+    // Calculate a derived streak from practice attempts + progress updates
+    let currentStreak = 0;
+    // For a real streak, we would look at consecutive days in the database where an action occurred.
+    // We can do a basic calculation here using recent practice attempts.
+    if (recentPracticeAttempts.length > 0) {
+      const dates = new Set(recentPracticeAttempts.map(a => {
+        const d = new Date(a.updatedAt);
+        d.setHours(0, 0, 0, 0);
+        return d.getTime();
+      }));
+      
+      let d = new Date();
+      d.setHours(0, 0, 0, 0);
+      
+      // If the user practiced today or yesterday, streak continues
+      if (dates.has(d.getTime())) {
+        currentStreak++;
+        d.setDate(d.getDate() - 1);
+        while (dates.has(d.getTime())) {
+          currentStreak++;
+          d.setDate(d.getDate() - 1);
+        }
+      } else {
+        d.setDate(d.getDate() - 1);
+        if (dates.has(d.getTime())) {
+          currentStreak++;
+          d.setDate(d.getDate() - 1);
+          while (dates.has(d.getTime())) {
+            currentStreak++;
+            d.setDate(d.getDate() - 1);
+          }
+        }
+      }
+    }
+
+    // Determine Q&As (mocking to 0 since there is no table)
+    const qaCount = 0;
+
+    return {
+      profile: careerDashboard.profile,
+      todayPlan,
+      progress: progressIntelligence,
+      topicsProgress,
+      mentorRecommendations: rankedActions.slice(0, 3), // Top 3 priority actions
+      careerReadiness: careerDashboard.careerReadiness,
+      streak: currentStreak,
+      qAndA: qaCount
+    };
+  }
+}
+
+--- FOUND C:\Users\VINAY\OneDrive\Desktop\google\apps\api\src\modules\dashboard\dashboard.controller.ts ---
+import { Request, Response } from 'express';
+import { DashboardService } from './dashboard.service';
+
+const dashboardService = new DashboardService();
+
+export class DashboardController {
+  async getDashboard(req: Request, res: Response) {
+    try {
+      const userId = req.user!.id;
+      const data = await dashboardService.getDashboard(userId);
+      res.json(data);
+    } catch (error: any) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to fetch dashboard aggregation' });
+    }
+  }
+}
+
+--- FOUND C:\Users\VINAY\OneDrive\Desktop\google\apps\api\src\modules\dashboard\dashboard.routes.ts ---
+import { Router } from 'express';
+import { DashboardController } from './dashboard.controller';
+
+const router = Router();
+const dashboardController = new DashboardController();
+
+router.get('/', dashboardController.getDashboard.bind(dashboardController));
+
+export default router;
+
+--- FOUND C:\Users\VINAY\OneDrive\Desktop\google\apps\web\src\services\dashboardApi.ts ---
+import { fetchApi } from './api';
+import { DailyPlan } from './plannerApi';
+
+export interface DashboardData {
+  profile: any;
+  todayPlan: DailyPlan;
+  progress: any;
+  topicsProgress: any;
+  mentorRecommendations: any[];
+  careerReadiness: any;
+  streak: number;
+  qAndA: number;
+}
+
+export const dashboardApi = {
+  getDashboard: () => fetchApi<DashboardData>('/dashboard'),
+};
+
+--- FOUND C:\Users\VINAY\OneDrive\Desktop\google\apps\api\scripts\test_dashboard_integration.ts ---
+import { PrismaClient } from '@prisma/client';
+import { DashboardService } from '../src/modules/dashboard/dashboard.service';
+
+const prisma = new PrismaClient();
+const dashboardService = new DashboardService();
+
+async function run() {
+  console.log('--- DASHBOARD INTEGRATION TEST ---');
+  
+  // 1. Get a user
+  const user = await prisma.user.findFirst({
+    include: { careerProfile: true, profile: true }
+  });
+
+  if (!user) {
+    console.log('No user found to test with.');
+    return;
+  }
+
+  console.log(`Testing with User: ${user.email} (ID: ${user.id})`);
+
+  try {
+    // 2. Fetch the dashboard data
+    console.log('\nFetching dashboard aggregation...');
+    const dashboard = await dashboardService.getDashboard(user.id);
+    
+    // 3. Verify elements
+    console.log('\n--- VERIFICATION ---');
+    console.log('1. Profile Data:', dashboard.profile ? '✅ YES' : '❌ NO');
+    console.log('2. Today Plan:', dashboard.todayPlan ? `✅ YES (${dashboard.todayPlan.tasks?.length || 0} tasks)` : '❌ NO');
+    
+    console.log('3. Overall Progress:', dashboard.progress ? `✅ YES (${dashboard.progress.overall?.percentage}%)` : '❌ NO');
+    console.log('4. Topics Progress:', dashboard.topicsProgress ? `✅ YES (${dashboard.topicsProgress.length} topics)` : '❌ NO');
+    
+    console.log('5. Mentor Recommendations:', dashboard.mentorRecommendations ? `✅ YES (${dashboard.mentorRecommendations.length} actions)` : '❌ NO');
+    console.log('6. Career Readiness:', dashboard.careerReadiness ? '✅ YES' : '❌ NO');
+    console.log('7. Derived Streak:', `✅ YES (${dashboard.streak} days)`);
+    
+    console.log('\n--- DASHBOARD INTEGRATION SUCCESSFUL ---');
+    
+  } catch (err) {
+    console.error('\n❌ ERROR during dashboard integration test:', err);
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
+run();
+
+--- FOUND C:\Users\VINAY\.gemini\antigravity-ide\brain\a54f8049-6747-4e4e-a1a9-c5a695fa0c26\scratch\fix_dashboard.js ---
+const fs = require('fs');
+
+let c = fs.readFileSync('C:/Users/VINAY/OneDrive/Desktop/google/apps/api/src/modules/dashboard/dashboard.service.ts', 'utf8');
+
+c = c.replace(/import { PriorityEngineService } from '\.\.\/mentor\/priority-engine\.service';/, `import { PriorityEngineService } from '../mentor/priority-engine.service';\nimport { PrismaClient } from '@prisma/client';\n\nconst prisma = new PrismaClient();`);
+c = c.replace(/this\.progressService\.getTopicsProgress\(userId\)/, `prisma.progress.findMany({ where: { userId, entityType: 'TOPIC' } })`);
+c = c.replace(/recentPracticeAttempts\.map\(a => \{/, `recentPracticeAttempts.map((a: { updatedAt: Date }) => {`);
+
+fs.writeFileSync('C:/Users/VINAY/OneDrive/Desktop/google/apps/api/src/modules/dashboard/dashboard.service.ts', c, 'utf8');
+

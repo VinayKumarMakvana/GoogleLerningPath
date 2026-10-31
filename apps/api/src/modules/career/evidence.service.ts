@@ -241,8 +241,8 @@ export class EvidenceService {
     const allEvidence = await this.getVerifiedEvidence(userId);
     const projectEvidence = allEvidence.filter(e => e.relatedProjectId === projectId);
 
-    const verifiedFindings: any[] = [];
-    const defensesPassed: any[] = [];
+    const verifiedFindings: { category: string; severity: string; explanation: string; resolutionTask: string }[] = [];
+    const defensesPassed: { type: string; score: number | null }[] = [];
 
     for (const sub of userState.submissions) {
       for (const r of sub.reviews) {
@@ -251,7 +251,7 @@ export class EvidenceService {
             category: f.category,
             severity: f.severity,
             explanation: f.explanation,
-            resolutionTask: f.recommendation
+            resolutionTask: f.recommendation || ''
           });
         }
       }

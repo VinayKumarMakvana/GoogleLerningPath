@@ -1,3 +1,4 @@
+import * as util from 'util';
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -11,6 +12,7 @@ import progressRoutes from './modules/progress/progress.routes';
 import projectRoutes from './modules/project/project.routes';
 import careerRoutes from './modules/career/career.routes';
 import contributionRoutes from './modules/contribution/contribution.routes';
+import dashboardRoutes from './modules/dashboard/dashboard.routes';
 
 // Initialize express app
 const app = express();
@@ -44,9 +46,10 @@ app.use('/api/v1/progress', progressRoutes);
 app.use('/api/v1/projects', projectRoutes);
 app.use('/api/v1/career', careerRoutes);
 app.use('/api/v1/contributions', contributionRoutes);
+app.use('/api/v1/dashboard', dashboardRoutes);
 
 // 404 Handler
-app.use((req: Request, res: Response, next: NextFunction) => {
+app.use((req: Request, res: Response, _next: NextFunction) => {
   res.status(404).json({
     error: {
       message: 'Not Found',
@@ -56,8 +59,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 // Global Error Handler
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  console.error(err.stack);
+app.use((err: Error, req: Request, res: Response, _next: NextFunction) => {
+  process.stderr.write(util.format(err.stack) + "\n");
   res.status(500).json({
     error: {
       message: 'Internal Server Error',

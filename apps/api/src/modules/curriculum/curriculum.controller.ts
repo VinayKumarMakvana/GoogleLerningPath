@@ -1,3 +1,4 @@
+import * as util from 'util';
 import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 
@@ -27,9 +28,9 @@ export const getRoadmap = async (req: Request, res: Response) => {
       }
     });
     res.json(roadmap);
-  } catch (error: any) {
-    console.error(error);
-    if (error.code === 'P2023') {
+  } catch (error: unknown) {
+    process.stderr.write(util.format(error) + "\n");
+    if ((error as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
       res.status(500).json({ error: 'Failed to fetch roadmap' });
@@ -59,9 +60,9 @@ export const getTopicDetails = async (req: Request, res: Response) => {
     }
     
     res.json(topic);
-  } catch (error: any) {
-    console.error(error);
-    if (error.code === 'P2023') {
+  } catch (error: unknown) {
+    process.stderr.write(util.format(error) + "\n");
+    if ((error as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
       res.status(500).json({ error: 'Failed to fetch topic' });
@@ -97,7 +98,7 @@ export const getAllTopics = async (req: Request, res: Response) => {
 
     res.json(topicsWithProgress);
   } catch (error) {
-    console.error(error);
+    process.stderr.write(util.format(error) + "\n");
     res.status(500).json({ error: 'Failed to fetch topics' });
   }
 };
@@ -115,7 +116,7 @@ export const getAllResources = async (req: Request, res: Response) => {
     });
     res.json(resources);
   } catch (error) {
-    console.error(error);
+    process.stderr.write(util.format(error) + "\n");
     res.status(500).json({ error: 'Failed to fetch resources' });
   }
 };
@@ -137,9 +138,9 @@ export const updateProgress = async (req: Request, res: Response) => {
     });
     
     res.json(progress);
-  } catch (error: any) {
-    console.error(error);
-    if (error.code === 'P2023') {
+  } catch (error: unknown) {
+    process.stderr.write(util.format(error) + "\n");
+    if ((error as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
       res.status(500).json({ error: 'Failed to update progress' });

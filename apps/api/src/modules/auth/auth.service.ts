@@ -57,8 +57,9 @@ export class AuthService {
     if (!secret) {
       throw new Error('JWT_SECRET is not defined in environment variables');
     }
+    const expiresIn = process.env.JWT_EXPIRES_IN ? parseInt(process.env.JWT_EXPIRES_IN, 10) : 604800;
     return jwt.sign({ id: userId }, secret, {
-      expiresIn: (process.env.JWT_EXPIRES_IN || '7d') as any,
+      expiresIn,
     });
   }
 }

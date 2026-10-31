@@ -1,3 +1,4 @@
+import * as util from 'util';
 import { Request, Response } from 'express';
 import { ContributionService } from './contribution.service';
 
@@ -9,9 +10,9 @@ export class ContributionController {
       const userId = req.user!.id;
       const contributions = await contributionService.getContributions(userId);
       res.json(contributions);
-    } catch (error: any) {
-      console.error(error);
-      if (error.code === 'P2023') {
+    } catch (error: unknown) {
+      process.stderr.write(util.format(error) + "\n");
+      if ((error as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
       res.status(500).json({ error: 'Failed to fetch contributions' });
@@ -24,10 +25,10 @@ export class ContributionController {
       const userId = req.user!.id;
       const contribution = await contributionService.getContribution(userId, id);
       res.json(contribution);
-    } catch (error: any) {
-      console.error(error);
-      if (error.message === 'Contribution not found') return res.status(404).json({ error: error.message });
-      if (error.code === 'P2023') {
+    } catch (error: unknown) {
+      process.stderr.write(util.format(error) + "\n");
+      if (((error as Error).message || String(error)) === 'Contribution not found') return res.status(404).json({ error: ((error as Error).message || String(error)) });
+      if ((error as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
       res.status(500).json({ error: 'Failed to fetch contribution' });
@@ -39,9 +40,9 @@ export class ContributionController {
       const userId = req.user!.id;
       const contribution = await contributionService.createContribution(userId, req.body);
       res.json(contribution);
-    } catch (error: any) {
-      console.error(error);
-      if (error.code === 'P2023') {
+    } catch (error: unknown) {
+      process.stderr.write(util.format(error) + "\n");
+      if ((error as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
       res.status(500).json({ error: 'Failed to create contribution' });
@@ -54,9 +55,9 @@ export class ContributionController {
       const userId = req.user!.id;
       const contribution = await contributionService.updateContribution(userId, id, req.body);
       res.json(contribution);
-    } catch (error: any) {
-      console.error(error);
-      if (error.code === 'P2023') {
+    } catch (error: unknown) {
+      process.stderr.write(util.format(error) + "\n");
+      if ((error as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
       res.status(500).json({ error: 'Failed to update contribution' });
@@ -71,9 +72,9 @@ export class ContributionController {
       const { status } = req.body;
       const task = await contributionService.updateTaskStatus(userId, taskId, status);
       res.json(task);
-    } catch (error: any) {
-      console.error(error);
-      if (error.code === 'P2023') {
+    } catch (error: unknown) {
+      process.stderr.write(util.format(error) + "\n");
+      if ((error as Error & { code?: string }).code === 'P2023') {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
       res.status(500).json({ error: 'Failed to update task status' });

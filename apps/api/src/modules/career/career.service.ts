@@ -163,7 +163,7 @@ export class CareerService {
   }
 
   async getCareerContextForEngine(userId: string) {
-    let profile = await prisma.careerProfile.findUnique({ where: { userId } });
+    const profile = await prisma.careerProfile.findUnique({ where: { userId } });
     const resumeReadiness = await evidenceService.getResumeReadiness(userId);
     const portfolioReadiness = await evidenceService.getPortfolioReadiness(userId);
     
