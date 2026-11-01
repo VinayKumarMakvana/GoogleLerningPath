@@ -7,8 +7,8 @@ import { AuthProvider } from "@/components/shared/AuthProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Mentorship Platform",
-  description: "Personal Software Engineering Mentorship Platform",
+  title: "Google SWE Command Center | High-Performance Mentorship Platform",
+  description: "Elite Software Engineering preparation and mentorship platform targeting Google L4/L5 engineering roles.",
 };
 
 export default function RootLayout({

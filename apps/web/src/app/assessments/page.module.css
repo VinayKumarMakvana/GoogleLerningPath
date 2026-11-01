@@ -1,69 +1,99 @@
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  animation: fadeIn 0.4s var(--ease-spring) forwards;
 }
 
 .loading {
   text-align: center;
-  padding: 3rem;
-  color: var(--text-secondary);
-  background: var(--bg-surface);
-  border-radius: 8px;
-  border: 1px dashed var(--border-color);
+  padding: var(--space-12);
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  border: 1px dashed var(--color-border);
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-6);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .assessmentCard {
   display: flex;
   flex-direction: column;
   height: 100%;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: all 0.25s var(--ease-spring);
+  position: relative;
+  overflow: hidden;
+}
+
+.assessmentCard:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .cardHeader {
   display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+  flex-wrap: wrap;
 }
 
 .title {
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
-  color: var(--text-primary);
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-2);
+  color: #ffffff;
 }
 
 .description {
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-  margin-bottom: 1.5rem;
-  line-height: 1.5;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+  line-height: 1.55;
   flex-grow: 1;
 }
 
 .meta {
   display: flex;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--border-color);
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .metaItem {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  color: var(--text-secondary);
+  gap: 6px;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
 }
 
 .actionArea {
   display: flex;
   justify-content: flex-end;
+  margin-top: auto;
 }
 
 .startButton {
@@ -84,17 +114,19 @@
 .scoreRow {
   display: flex;
   flex-direction: column;
+  gap: 2px;
 }
 
 .scoreLabel {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
 }
 
 .scoreValue {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: var(--text-primary);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #38bdf8;
+  font-family: var(--font-mono);
 }
 
 .buttons {
@@ -106,7 +138,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--primary-color);
-  font-weight: 500;
-  font-size: 0.95rem;
+  color: #38bdf8;
+  font-weight: 600;
+  font-size: 0.875rem;
 }

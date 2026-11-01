@@ -1,126 +1,491 @@
 .roadmapViewer {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
-.phaseCard {
+/* Master Hero Banner */
+.roadmapHero {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.75rem;
+  background: linear-gradient(135deg, rgba(10, 11, 16, 0.95) 0%, rgba(18, 20, 29, 0.85) 100%);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  position: relative;
   overflow: hidden;
-  border-left: 4px solid var(--color-primary);
 }
 
+.roadmapHero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 320px;
+  height: 100%;
+  background: radial-gradient(circle at top right, rgba(0, 112, 243, 0.15), transparent 70%);
+  pointer-events: none;
+}
+
+.heroBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #00dfd8;
+  background: rgba(0, 223, 216, 0.1);
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 223, 216, 0.25);
+  width: fit-content;
+}
+
+.heroTitle {
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin: 0;
+  word-break: break-word;
+}
+
+.heroSubtitle {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 860px;
+  margin: 0;
+  word-break: break-word;
+}
+
+/* Visual Progression Timeline */
+.timelineTrack {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding: 0.5rem 0 1rem 0;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.timelineNode {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  min-width: 140px;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.timelineNode:hover {
+  background: rgba(0, 112, 243, 0.08);
+  border-color: rgba(0, 112, 243, 0.4);
+}
+
+.timelineStep {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+  letter-spacing: 0.05em;
+}
+
+.timelineLabel {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Top Controls */
+.controlsBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0.25rem 0;
+}
+
+.progressInfo {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.toggleAllBtn {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.toggleAllBtn:hover {
+  background: var(--bg-surface-hover);
+  border-color: rgba(0, 112, 243, 0.4);
+}
+
+/* Phase Card */
+.phaseCard {
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--accent-blue);
+  border-radius: var(--radius-lg);
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  transition: all 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.phaseCard:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  border-left-color: var(--accent-blue);
+}
+
+/* Header */
 .phaseHeader {
-  padding: var(--space-4) var(--space-5);
+  padding: 1.25rem 1.5rem;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--color-surface);
-  transition: background-color 0.2s;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: var(--bg-surface);
+  transition: background 0.15s ease;
 }
 
 .phaseHeader:hover {
-  background-color: var(--color-surface-hover);
+  background: var(--bg-surface-hover);
 }
 
 .phaseTitleWrapper {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
-  color: var(--color-text-main);
+  gap: 0.75rem;
+  color: var(--text-primary);
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .phaseTitle {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+  word-break: break-word;
+}
+
+.phaseMetaRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.durationBadge {
+  font-size: 0.72rem;
   font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+  background: rgba(245, 158, 11, 0.1);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  white-space: nowrap;
+}
+
+.phaseBadge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+  background: rgba(0, 112, 243, 0.1);
+  color: #38bdf8;
+  border: 1px solid rgba(0, 112, 243, 0.25);
+  white-space: nowrap;
+}
+
+/* Content */
+.phaseContent {
+  padding: 1.5rem;
+  border-top: 1px solid var(--border-color);
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+@media (max-width: 768px) {
+  .phaseHeader {
+    padding: 1rem;
+  }
+  .phaseContent {
+    padding: 1rem;
+  }
+}
+
+/* Roadmap Guide Section (How to study & architecture) */
+.roadmapGuideBox {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+}
+
+.guideSectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #00dfd8;
   margin: 0;
 }
 
-.phaseContent {
-  padding: var(--space-5);
-  border-top: 1px solid var(--color-border);
-  background-color: var(--color-background);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
+.objectiveText {
+  font-size: 0.95rem;
+  color: #f1f5f9;
+  line-height: 1.6;
+  margin: 0;
 }
 
+.strategyList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 0;
+  padding-left: 1.25rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.strategyItem {
+  color: #cbd5e1;
+}
+
+.strategyItem strong {
+  color: #ffffff;
+}
+
+/* Diagram Box */
+.diagramBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.diagramLabel {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.diagramPre {
+  background: #08090d;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: #38bdf8;
+  overflow-x: auto;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Milestone Box */
+.milestoneBox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  background: rgba(16, 185, 129, 0.06);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  color: #6ee7b7;
+  line-height: 1.5;
+}
+
+.skillsPillRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.skillPill {
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 2px 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  color: #e2e8f0;
+}
+
+/* Phase Divider */
+.curriculumDivider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.5rem 0;
+}
+
+.dividerLine {
+  flex-grow: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.dividerText {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* Modules & Resources Grid */
 .moduleSection {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-5);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .moduleTitle {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--color-text-main);
-  margin-bottom: var(--space-4);
-  padding-bottom: var(--space-2);
-  border-bottom: 1px solid var(--color-border);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .skillsGrid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-4);
+  gap: 1rem;
+  width: 100%;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 900px) {
   .skillsGrid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 .skillBox {
-  background-color: var(--color-surface-hover);
-  border-radius: var(--radius-md);
-  padding: var(--space-4);
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .skillTitle {
-  font-size: 1rem;
+  font-size: 0.88rem;
   font-weight: 600;
-  margin-bottom: var(--space-3);
-  color: var(--color-text-main);
+  color: #f1f5f9;
+  margin-bottom: 0.75rem;
 }
 
 .topicList {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: 0.5rem;
+  width: 100%;
 }
 
 .topicItem {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
-  padding: var(--space-3);
+  padding: 0.85rem;
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
-  transition: border-color 0.2s, box-shadow 0.2s;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .topicItem:hover {
-  border-color: var(--color-primary-light);
-  box-shadow: var(--shadow-sm);
+  border-color: rgba(0, 112, 243, 0.5);
+  background: var(--bg-surface-hover);
+  transform: translateX(2px);
+  box-shadow: 0 4px 16px rgba(0, 112, 243, 0.15);
 }
 
 .topicMain {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  font-weight: 500;
-  font-size: 0.875rem;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: #f8fafc;
+}
+
+.topicTitleText {
+  word-break: break-word;
+  line-height: 1.4;
 }
 
 .topicMeta {
   display: flex;
   align-items: center;
-  gap: var(--space-1);
-  font-size: 0.75rem;
-  color: var(--color-text-muted);
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.videoBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #f43f5e;
+  background: rgba(244, 63, 94, 0.1);
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  border: 1px solid rgba(244, 63, 94, 0.25);
 }

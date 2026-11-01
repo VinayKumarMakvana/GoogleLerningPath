@@ -1,6 +1,5 @@
+import { fetchApi } from './api';
 import { PracticeProblem } from './practiceApi';
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api/v1';
 
 export interface Assessment {
   id: string;
@@ -28,8 +27,9 @@ export interface AssessmentResult {
   attemptId: string;
   practiceProblemId: string;
   status: string;
-  timeSpent: number | null;
   hintsUsed: number;
+  timeSpent: number | null;
+  practiceProblem?: PracticeProblem;
 }
 
 export interface AssessmentAttempt {
@@ -46,65 +46,38 @@ export interface AssessmentAttempt {
 }
 
 export const assessmentApi = {
-  getAssessments: async (): Promise<Assessment[]> => {
-    const res = await fetch(`${API_URL}/assessments`);
-    if (!res.ok) throw new Error('Failed to fetch assessments');
-    return res.json();
-  },
+  getAssessments: (): Promise<Assessment[]> => 
+    fetchApi<Assessment[]>('/assessments'),
 
-  getAssessment: async (id: string): Promise<Assessment> => {
-    const res = await fetch(`${API_URL}/assessments/${id}`);
-    if (!res.ok) throw new Error('Failed to fetch assessment details');
-    return res.json();
-  },
+  getAssessment: (id: string): Promise<Assessment> => 
+    fetchApi<Assessment>(`/assessments/${id}`),
 
-  startAttempt: async (id: string): Promise<AssessmentAttempt> => {
-    const res = await fetch(`${API_URL}/assessments/${id}/attempt`, {
-      method: 'POST'
-    });
-    if (!res.ok) throw new Error('Failed to start attempt');
-    return res.json();
-  },
+  startAttempt: (id: string): Promise<AssessmentAttempt> => 
+    fetchApi<AssessmentAttempt>(`/assessments/${id}/attempt`, { method: 'POST' }),
 
-  getActiveAttempt: async (id: string): Promise<AssessmentAttempt> => {
-    const res = await fetch(`${API_URL}/assessments/${id}/attempt`);
-    if (!res.ok) throw new Error('Failed to fetch active attempt');
-    return res.json();
-  },
+  getActiveAttempt: (id: string): Promise<AssessmentAttempt> => 
+    fetchApi<AssessmentAttempt>(`/assessments/${id}/attempt`),
 
-  getAttempt: async (attemptId: string): Promise<AssessmentAttempt> => {
-    const res = await fetch(`${API_URL}/assessments/attempts/${attemptId}`);
-    if (!res.ok) throw new Error('Failed to fetch attempt');
-    return res.json();
-  },
+  getAttempt: (attemptId: string): Promise<AssessmentAttempt> => 
+    fetchApi<AssessmentAttempt>(`/assessments/attempts/${attemptId}`),
 
-  recordProblemResult: async (
+  recordProblemResult: (
     attemptId: string, 
     problemId: string, 
     status: string, 
     hintsUsed: number, 
     timeSpent: number
-  ): Promise<AssessmentResult> => {
-    const res = await fetch(`${API_URL}/assessments/attempts/${attemptId}/problem`, {
+  ): Promise<AssessmentResult> => 
+    fetchApi<AssessmentResult>(`/assessments/attempts/${attemptId}/problem`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ problemId, status, hintsUsed, timeSpent })
-    });
-    if (!res.ok) throw new Error('Failed to record result');
-    return res.json();
-  },
+    }),
 
-  submitAttempt: async (attemptId: string): Promise<AssessmentAttempt> => {
-    const res = await fetch(`${API_URL}/assessments/attempts/${attemptId}/submit`, {
+  submitAttempt: (attemptId: string): Promise<AssessmentAttempt> => 
+    fetchApi<AssessmentAttempt>(`/assessments/attempts/${attemptId}/submit`, {
       method: 'POST'
-    });
-    if (!res.ok) throw new Error('Failed to submit attempt');
-    return res.json();
-  },
+    }),
 
-  getHistory: async (): Promise<AssessmentAttempt[]> => {
-    const res = await fetch(`${API_URL}/assessments/history`);
-    if (!res.ok) throw new Error('Failed to fetch history');
-    return res.json();
-  }
+  getHistory: (): Promise<AssessmentAttempt[]> => 
+    fetchApi<AssessmentAttempt[]>('/assessments/history')
 };

@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import ReactMarkdown from 'react-markdown';
 import styles from './page.module.css';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
 import { EmptyState } from '@/components/shared/EmptyState';
+import { RichMarkdown } from '@/components/shared/RichMarkdown';
+
 
 import { fetchApi } from '@/services/api';
 
@@ -105,7 +106,7 @@ export default function TopicPage() {
           <div>
             {learnContent ? (
               <div className={styles.markdown}>
-                <ReactMarkdown>{learnContent.content}</ReactMarkdown>
+                <RichMarkdown content={learnContent.content} />
                 <div className={styles.actionArea}>
                   <Button variant="primary" onClick={() => handleMarkProgress('LEARNING')}>Mark as Completed</Button>
                 </div>
@@ -120,7 +121,7 @@ export default function TopicPage() {
           <div>
             {noteContent ? (
               <div className={styles.markdown}>
-                <ReactMarkdown>{noteContent.content}</ReactMarkdown>
+                <RichMarkdown content={noteContent.content} />
               </div>
             ) : (
               <div className={styles.pendingNotice}>Full notes are not yet available.</div>
@@ -132,7 +133,7 @@ export default function TopicPage() {
           <div>
             {shortNoteContent ? (
               <div className={styles.markdown}>
-                <ReactMarkdown>{shortNoteContent.content}</ReactMarkdown>
+                <RichMarkdown content={shortNoteContent.content} />
                 <div className={styles.actionArea}>
                   <Button variant="secondary" onClick={() => handleMarkProgress('REVISION')}>Needs Revision</Button>
                   <Button variant="primary" onClick={() => handleMarkProgress('REVISION')}>Mark Reviewed</Button>
@@ -148,7 +149,7 @@ export default function TopicPage() {
           <div>
             {cheatSheetContent ? (
               <div className={styles.markdown}>
-                <ReactMarkdown>{cheatSheetContent.content}</ReactMarkdown>
+                <RichMarkdown content={cheatSheetContent.content} />
               </div>
             ) : (
               <div className={styles.pendingNotice}>Cheat sheet is pending curation.</div>
@@ -156,27 +157,37 @@ export default function TopicPage() {
           </div>
         )}
 
+
         {activeTab === 'resources' && (
           <div className={styles.resourceList}>
             {topic.resources.length > 0 ? (
-              topic.resources.map((r, i) => (
-                <div key={i} className={styles.resourceCard}>
-                  <div className={styles.resourceInfo}>
-                    <h3>{r.title}</h3>
-                    <div className={styles.resourceMeta}>
-                      <Badge variant="primary">{r.type}</Badge>
-                      <Badge variant="warning">Priority {r.priority}</Badge>
+              topic.resources.map((r, i) => {
+                const isYouTube = r.url?.includes('youtube') || r.url?.includes('youtu.be') || r.type === 'VIDEO';
+                return (
+                  <div key={i} className={styles.resourceCard}>
+                    <div className={styles.resHeader}>
+                      <h3 className={styles.resTitle}>{r.title}</h3>
+                      <div className={styles.resMeta}>
+                        <Badge variant="primary">{isYouTube ? 'YOUTUBE LECTURE' : r.type}</Badge>
+                        <Badge variant="warning">Priority {r.priority}</Badge>
+                      </div>
+                    </div>
+                    <div>
+                      {r.url ? (
+                        <Button 
+                          variant="primary" 
+                          onClick={() => window.open(r.url, '_blank')}
+                          style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+                        >
+                          {isYouTube ? 'Watch Video' : 'Open Resource'}
+                        </Button>
+                      ) : (
+                        <Badge variant="secondary">PENDING CURATION</Badge>
+                      )}
                     </div>
                   </div>
-                  <div>
-                    {r.status === 'PUBLISHED' && r.url ? (
-                      <Button variant="primary" onClick={() => window.open(r.url, '_blank')}>Open Resource</Button>
-                    ) : (
-                      <Badge variant="secondary">PENDING CURATION</Badge>
-                    )}
-                  </div>
-                </div>
-              ))
+                );
+              })
             ) : (
               <div className={styles.pendingNotice}>No resources available yet.</div>
             )}

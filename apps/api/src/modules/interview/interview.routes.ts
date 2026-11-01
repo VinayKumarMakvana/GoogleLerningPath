@@ -6,7 +6,9 @@ const controller = new InterviewController();
 
 router.get('/readiness', controller.getReadiness);
 router.get('/queue', controller.getAdaptiveQueue);
+router.get('/adaptive-queue', controller.getAdaptiveQueue);
 router.post('/mock', controller.generateMockSession);
 router.post('/mock/:id/evaluate', controller.evaluateMockSession);
+
 
 export default router;

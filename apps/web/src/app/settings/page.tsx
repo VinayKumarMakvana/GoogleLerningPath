@@ -31,9 +31,12 @@ export default function SettingsPage() {
   const handleLogout = () => {
     if (typeof window !== 'undefined') {
       localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      document.cookie = 'token=; Max-Age=0; path=/;';
       window.location.href = '/login';
     }
   };
+
 
   return (
     <div className={styles.container}>

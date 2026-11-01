@@ -15,9 +15,11 @@ router.get('/dashboard', practiceController.getDashboard.bind(practiceController
 
 // GET /api/v1/practice
 router.get('/', practiceController.getProblems.bind(practiceController));
+router.get('/problems', practiceController.getProblems.bind(practiceController));
 
 // GET /api/v1/practice/:slug
 router.get('/:slug', practiceController.getProblemBySlug.bind(practiceController));
+
 
 // POST /api/v1/practice/:id/attempts
 router.post('/:id/attempts', practiceController.createAttempt.bind(practiceController));

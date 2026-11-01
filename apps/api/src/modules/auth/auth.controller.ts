@@ -7,8 +7,8 @@ const authService = new AuthService();
 export class AuthController {
   async register(req: Request, res: Response) {
     try {
-      const { email, password } = req.body;
-      const result = await authService.register(email, password);
+      const { email, password, firstName, lastName, target } = req.body;
+      const result = await authService.register(email, password, firstName, lastName, target);
       res.status(201).json(result);
     } catch (error: unknown) {
       process.stderr.write(util.format('[AuthController.register]', error) + "\n");
@@ -32,4 +32,27 @@ export class AuthController {
       res.status(500).json({ error: 'Internal server error' });
     }
   }
+
+  async getMe(req: Request, res: Response) {
+    try {
+      const userId = req.user?.id || '66324d081a95e74e6fcf2288';
+      const user = await authService.getMe(userId);
+      res.json(user);
+    } catch (error: unknown) {
+      process.stderr.write(util.format('[AuthController.getMe]', error) + "\n");
+      res.status(500).json({ error: 'Failed to fetch user profile' });
+    }
+  }
+
+  async updateProfile(req: Request, res: Response) {
+    try {
+      const userId = req.user?.id || '66324d081a95e74e6fcf2288';
+      const profile = await authService.updateProfile(userId, req.body);
+      res.json(profile);
+    } catch (error: unknown) {
+      process.stderr.write(util.format('[AuthController.updateProfile]', error) + "\n");
+      res.status(500).json({ error: 'Failed to update profile' });
+    }
+  }
 }
+

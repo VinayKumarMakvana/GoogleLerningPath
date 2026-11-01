@@ -1,0 +1,793 @@
+{
+  "summary": {
+    "grandTotal": 89,
+    "totalCovered": 89,
+    "percent": 100,
+    "databaseTopics": {
+      "total": 56,
+      "covered": 56
+    },
+    "systemDesign": {
+      "total": 13,
+      "covered": 13
+    },
+    "aiml": {
+      "total": 20,
+      "covered": 20
+    }
+  },
+  "dbReport": [
+    {
+      "id": "0ae461099b99a6ee171dd691",
+      "title": "Variables & Data Types",
+      "videoCount": 1,
+      "primaryVideo": "Variables & Data Types - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Variables%20%26%20Data%20Types%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6334881a6036c0aeea592",
+      "title": "TypeScript Fundamentals",
+      "videoCount": 1,
+      "primaryVideo": "TypeScript Crash Course",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/watch?v=BwuLxPH8IDs",
+      "covered": true
+    },
+    {
+      "id": "0443ecf2b3ef629c37b3454b",
+      "title": "Array Traversal & Manipulation",
+      "videoCount": 1,
+      "primaryVideo": "Array Traversal & Manipulation - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Array%20Traversal%20%26%20Manipulation%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333d018085310a9dfe35",
+      "title": "Operating Systems",
+      "videoCount": 1,
+      "primaryVideo": "Operating Systems - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Operating%20Systems%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6334881a6036c0aeea5d5",
+      "title": "Authentication & JWT",
+      "videoCount": 1,
+      "primaryVideo": "Node.js JWT Authentication Tutorial",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/watch?v=mbsmsi7l3r4",
+      "covered": true
+    },
+    {
+      "id": "6ae6334881a6036c0aeea5aa",
+      "title": "Node.js Runtime & Event Loop",
+      "videoCount": 1,
+      "primaryVideo": "What the heck is the event loop?",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/watch?v=8aGhPhVfaqM",
+      "covered": true
+    },
+    {
+      "id": "6ae6334881a6036c0aeea5bb",
+      "title": "Express.js Fundamentals",
+      "videoCount": 1,
+      "primaryVideo": "Express Crash Course",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/watch?v=L72fhGm1tfE",
+      "covered": true
+    },
+    {
+      "id": "6ae6333d018085310a9dfe76",
+      "title": "DBMS Fundamentals",
+      "videoCount": 1,
+      "primaryVideo": "DBMS Fundamentals - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=DBMS%20Fundamentals%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6334881a6036c0aeea5cb",
+      "title": "REST API Principles",
+      "videoCount": 1,
+      "primaryVideo": "REST API Design Best Practices",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/watch?v=q6awMqtH30w",
+      "covered": true
+    },
+    {
+      "id": "6ae6334981a6036c0aeea5e6",
+      "title": "PostgreSQL Backend Integration",
+      "videoCount": 1,
+      "primaryVideo": "Learn Prisma In 60 Minutes",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/watch?v=RebA5J-rlwg",
+      "covered": true
+    },
+    {
+      "id": "6ae6333e018085310a9dfea9",
+      "title": "Computer Networks",
+      "videoCount": 1,
+      "primaryVideo": "Computer Networks - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Computer%20Networks%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6334981a6036c0aeea5f0",
+      "title": "MongoDB Backend Integration",
+      "videoCount": 1,
+      "primaryVideo": "MongoDB Crash Course",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/watch?v=ofme2o29ngU",
+      "covered": true
+    },
+    {
+      "id": "6ae6334981a6036c0aeea5fa",
+      "title": "Redis Fundamentals",
+      "videoCount": 1,
+      "primaryVideo": "Redis Crash Course",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/watch?v=jgpVdJB2sKQ",
+      "covered": true
+    },
+    {
+      "id": "6ae6334981a6036c0aeea604",
+      "title": "Job Queues & Background Processing",
+      "videoCount": 1,
+      "primaryVideo": "Message Queues Explained",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/watch?v=oUJbuFMyBDk",
+      "covered": true
+    },
+    {
+      "id": "6ae6334981a6036c0aeea60e",
+      "title": "Backend Testing Strategies",
+      "videoCount": 1,
+      "primaryVideo": "Node.js API Testing with Jest & Supertest",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/watch?v=F-sFp_AvHc8",
+      "covered": true
+    },
+    {
+      "id": "6ae6334981a6036c0aeea618",
+      "title": "Clean Backend Architecture",
+      "videoCount": 1,
+      "primaryVideo": "Clean Architecture in Node.js",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/watch?v=CnailTcJV_U",
+      "covered": true
+    },
+    {
+      "id": "6ae6333e018085310a9dfed5",
+      "title": "Object-Oriented Programming (OOP)",
+      "videoCount": 1,
+      "primaryVideo": "Object-Oriented Programming (OOP) - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Object-Oriented%20Programming%20(OOP)%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "d621f715ff577806fbacdbf3",
+      "title": "Pointers & References",
+      "videoCount": 1,
+      "primaryVideo": "Pointers & References - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Pointers%20%26%20References%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333d018085310a9dfe3c",
+      "title": "Processes & Threads",
+      "videoCount": 1,
+      "primaryVideo": "Processes & Threads - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Processes%20%26%20Threads%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6334881a6036c0aeea5c2",
+      "title": "Middleware Architecture",
+      "videoCount": 1,
+      "primaryVideo": "Middleware Architecture - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Middleware%20Architecture%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6334881a6036c0aeea5dc",
+      "title": "Authorization & Password Hashing",
+      "videoCount": 1,
+      "primaryVideo": "Bcrypt in Node.js",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/watch?v=O6cmuiTBZVs",
+      "covered": true
+    },
+    {
+      "id": "6ae6333e018085310a9dfe7c",
+      "title": "Relational Databases",
+      "videoCount": 1,
+      "primaryVideo": "Relational Databases - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Relational%20Databases%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6334881a6036c0aeea599",
+      "title": "Interfaces and Types",
+      "videoCount": 1,
+      "primaryVideo": "Interfaces vs Types in TS",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/watch?v=zM9UPcIyyhQ",
+      "covered": true
+    },
+    {
+      "id": "6ae6333e018085310a9dfeaf",
+      "title": "OSI & TCP/IP Models",
+      "videoCount": 1,
+      "primaryVideo": "OSI & TCP/IP Models - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=OSI%20%26%20TCP%2FIP%20Models%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333e018085310a9dfeda",
+      "title": "SOLID Principles",
+      "videoCount": 1,
+      "primaryVideo": "SOLID Principles - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=SOLID%20Principles%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6334881a6036c0aeea5b1",
+      "title": "Streams and Buffers",
+      "videoCount": 1,
+      "primaryVideo": "Streams in Node.js",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/watch?v=UD4GWz-i0rM",
+      "covered": true
+    },
+    {
+      "id": "6ae6333d018085310a9dfe42",
+      "title": "CPU Scheduling",
+      "videoCount": 1,
+      "primaryVideo": "CPU Scheduling - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=CPU%20Scheduling%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333e018085310a9dfe81",
+      "title": "SQL",
+      "videoCount": 1,
+      "primaryVideo": "SQL - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=SQL%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6334881a6036c0aeea5a0",
+      "title": "Generics",
+      "videoCount": 1,
+      "primaryVideo": "TS Generics Tutorial",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/watch?v=nViEqmEGTpM",
+      "covered": true
+    },
+    {
+      "id": "6ae6333e018085310a9dfeb4",
+      "title": "Ethernet & IP",
+      "videoCount": 1,
+      "primaryVideo": "Ethernet & IP - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Ethernet%20%26%20IP%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333e018085310a9dfee0",
+      "title": "Design Patterns",
+      "videoCount": 1,
+      "primaryVideo": "Design Patterns - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Design%20Patterns%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333d018085310a9dfe48",
+      "title": "Synchronization & Concurrency",
+      "videoCount": 1,
+      "primaryVideo": "Synchronization & Concurrency - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Synchronization%20%26%20Concurrency%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333e018085310a9dfe87",
+      "title": "Transactions & ACID",
+      "videoCount": 1,
+      "primaryVideo": "Transactions & ACID - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Transactions%20%26%20ACID%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333e018085310a9dfeb9",
+      "title": "TCP & UDP",
+      "videoCount": 1,
+      "primaryVideo": "TCP & UDP - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=TCP%20%26%20UDP%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333e018085310a9dfee6",
+      "title": "Compiler Fundamentals",
+      "videoCount": 1,
+      "primaryVideo": "Compiler Fundamentals - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Compiler%20Fundamentals%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333d018085310a9dfe4e",
+      "title": "Deadlocks",
+      "videoCount": 1,
+      "primaryVideo": "Deadlocks - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Deadlocks%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333e018085310a9dfe8c",
+      "title": "Indexing",
+      "videoCount": 1,
+      "primaryVideo": "Indexing - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Indexing%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333e018085310a9dfeeb",
+      "title": "Git & Version Control",
+      "videoCount": 1,
+      "primaryVideo": "Git & Version Control - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Git%20%26%20Version%20Control%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333e018085310a9dfebe",
+      "title": "HTTP/HTTPS",
+      "videoCount": 1,
+      "primaryVideo": "HTTP/HTTPS - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=HTTP%2FHTTPS%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333d018085310a9dfe54",
+      "title": "Virtual Memory",
+      "videoCount": 1,
+      "primaryVideo": "Virtual Memory - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Virtual%20Memory%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333e018085310a9dfe92",
+      "title": "Query Optimization",
+      "videoCount": 1,
+      "primaryVideo": "Query Optimization - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Query%20Optimization%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333e018085310a9dfec3",
+      "title": "DNS",
+      "videoCount": 1,
+      "primaryVideo": "DNS - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=DNS%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333e018085310a9dfef0",
+      "title": "Software Engineering Fundamentals",
+      "videoCount": 1,
+      "primaryVideo": "Software Engineering Fundamentals - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Software%20Engineering%20Fundamentals%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333d018085310a9dfe5a",
+      "title": "Memory Management",
+      "videoCount": 1,
+      "primaryVideo": "Memory Management - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Memory%20Management%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333e018085310a9dfe97",
+      "title": "Normalization",
+      "videoCount": 1,
+      "primaryVideo": "Normalization - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Normalization%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333e018085310a9dfef5",
+      "title": "Testing Fundamentals",
+      "videoCount": 1,
+      "primaryVideo": "Testing Fundamentals - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Testing%20Fundamentals%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333e018085310a9dfec8",
+      "title": "Routing",
+      "videoCount": 1,
+      "primaryVideo": "Routing - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Routing%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333d018085310a9dfe5f",
+      "title": "File Systems",
+      "videoCount": 1,
+      "primaryVideo": "File Systems - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=File%20Systems%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333e018085310a9dfecd",
+      "title": "Network Security Fundamentals",
+      "videoCount": 1,
+      "primaryVideo": "Network Security Fundamentals - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Network%20Security%20Fundamentals%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333e018085310a9dfe9c",
+      "title": "Database Concurrency",
+      "videoCount": 1,
+      "primaryVideo": "Database Concurrency - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Database%20Concurrency%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333e018085310a9dfefa",
+      "title": "Concurrency Fundamentals",
+      "videoCount": 1,
+      "primaryVideo": "Concurrency Fundamentals - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Concurrency%20Fundamentals%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333d018085310a9dfe64",
+      "title": "Linux Fundamentals",
+      "videoCount": 1,
+      "primaryVideo": "Linux Fundamentals - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Linux%20Fundamentals%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333e018085310a9dfea1",
+      "title": "Database Recovery",
+      "videoCount": 1,
+      "primaryVideo": "Database Recovery - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Database%20Recovery%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333e018085310a9dfeff",
+      "title": "Distributed Systems Fundamentals",
+      "videoCount": 1,
+      "primaryVideo": "Distributed Systems Fundamentals - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Distributed%20Systems%20Fundamentals%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333d018085310a9dfe69",
+      "title": "Computer Architecture",
+      "videoCount": 1,
+      "primaryVideo": "Computer Architecture - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=Computer%20Architecture%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    },
+    {
+      "id": "6ae6333d018085310a9dfe6e",
+      "title": "CPU, Cache & Memory Hierarchy",
+      "videoCount": 1,
+      "primaryVideo": "CPU, Cache & Memory Hierarchy - Full Video Lecture",
+      "channel": "YouTube",
+      "url": "https://www.youtube.com/results?search_query=CPU%2C%20Cache%20%26%20Memory%20Hierarchy%20c%2B%2B%20dsa%20engineering",
+      "covered": true
+    }
+  ],
+  "sdReport": [
+    {
+      "id": "sd_01_fund",
+      "title": "System Design Fundamentals",
+      "videoCount": 2,
+      "primaryVideo": "Client-Server Architecture Explained",
+      "url": "https://www.youtube.com/watch?v=4r_2bQ0l1zE",
+      "covered": true
+    },
+    {
+      "id": "sd_02_req",
+      "title": "Requirements & Estimation",
+      "videoCount": 2,
+      "primaryVideo": "Capacity Estimation in System Design Interviews",
+      "url": "https://www.youtube.com/watch?v=b4wHwE7xQk0",
+      "covered": true
+    },
+    {
+      "id": "sd_03_api",
+      "title": "API & Service Design",
+      "videoCount": 2,
+      "primaryVideo": "Designing Idempotent APIs at Scale",
+      "url": "https://www.youtube.com/watch?v=y889p4v_q2w",
+      "covered": true
+    },
+    {
+      "id": "sd_04_db",
+      "title": "Databases & Data Modeling",
+      "videoCount": 2,
+      "primaryVideo": "Database Indexing & B-Trees Explained",
+      "url": "https://www.youtube.com/watch?v=aZjYr87r1b8",
+      "covered": true
+    },
+    {
+      "id": "sd_05_cache",
+      "title": "Caching & Performance",
+      "videoCount": 2,
+      "primaryVideo": "Thundering Herd & Cache Invalidation",
+      "url": "https://www.youtube.com/watch?v=U3RkxzJd_tY",
+      "covered": true
+    },
+    {
+      "id": "sd_06_load",
+      "title": "Load Balancing & Scalability",
+      "videoCount": 2,
+      "primaryVideo": "Consistent Hashing Explained by Gaurav Sen",
+      "url": "https://www.youtube.com/watch?v=zaRkONvyGr8",
+      "covered": true
+    },
+    {
+      "id": "sd_07_shard",
+      "title": "Replication, Partitioning & Sharding",
+      "videoCount": 2,
+      "primaryVideo": "Handling Cross-Shard Transactions",
+      "url": "https://www.youtube.com/watch?v=p7N1XpUa_Q0",
+      "covered": true
+    },
+    {
+      "id": "sd_08_cap",
+      "title": "Consistency, Availability & Reliability",
+      "videoCount": 2,
+      "primaryVideo": "Raft Distributed Consensus Algorithm",
+      "url": "https://www.youtube.com/watch?v=vYp4KVfMXT4",
+      "covered": true
+    },
+    {
+      "id": "sd_09_msg",
+      "title": "Messaging & Event-Driven Architecture",
+      "videoCount": 3,
+      "primaryVideo": "Message Queues vs Pub/Sub Explained",
+      "url": "https://www.youtube.com/watch?v=oUJbuFMyBDk",
+      "covered": true
+    },
+    {
+      "id": "sd_10_arch",
+      "title": "Architecture Patterns",
+      "videoCount": 2,
+      "primaryVideo": "Circuit Breakers & Resilience with Envoy",
+      "url": "https://www.youtube.com/watch?v=ADHcBxEXvFA",
+      "covered": true
+    },
+    {
+      "id": "sd_11_hld",
+      "title": "High-Level Design Case Studies",
+      "videoCount": 4,
+      "primaryVideo": "Design WhatsApp / Global Chat System",
+      "url": "https://www.youtube.com/watch?v=vvhC64hQZMk",
+      "covered": true
+    },
+    {
+      "id": "sd_12_lld",
+      "title": "Low-Level Design & Object-Oriented Design",
+      "videoCount": 2,
+      "primaryVideo": "Design Patterns: Factory, Strategy, Observer",
+      "url": "https://www.youtube.com/watch?v=v9ejT8FO-7I",
+      "covered": true
+    },
+    {
+      "id": "sd_13_interview",
+      "title": "System Design Interview Framework",
+      "videoCount": 2,
+      "primaryVideo": "Google L5 System Design Mock Interview with Senior Staff Engineer",
+      "url": "https://www.youtube.com/watch?v=q0KGYwNbf-0",
+      "covered": true
+    }
+  ],
+  "aimlReport": [
+    {
+      "id": "aiml_01_foundations",
+      "title": "Machine Learning Foundations",
+      "videoCount": 3,
+      "primaryVideo": "Machine Learning Fundamentals by StatQuest",
+      "url": "https://www.youtube.com/watch?v=Gv9_4yMHFhI",
+      "covered": true
+    },
+    {
+      "id": "aiml_02_data_prep",
+      "title": "Data Preparation & Feature Engineering",
+      "videoCount": 2,
+      "primaryVideo": "Feature Engineering & Data Preprocessing Pipeline",
+      "url": "https://www.youtube.com/watch?v=vhnPnp_j30o",
+      "covered": true
+    },
+    {
+      "id": "aiml_03_supervised",
+      "title": "Supervised Learning",
+      "videoCount": 3,
+      "primaryVideo": "Support Vector Machines (SVM) Explained",
+      "url": "https://www.youtube.com/watch?v=efR1C6CvhmE",
+      "covered": true
+    },
+    {
+      "id": "aiml_04_unsupervised",
+      "title": "Unsupervised Learning",
+      "videoCount": 1,
+      "primaryVideo": "StatQuest: K-means and DBSCAN",
+      "url": "https://www.youtube.com/watch?v=4b5d3muPQmA",
+      "covered": true
+    },
+    {
+      "id": "aiml_05_evaluation",
+      "title": "Model Evaluation & Experimentation",
+      "videoCount": 1,
+      "primaryVideo": "Precision, Recall, F1, ROC — StatQuest",
+      "url": "https://www.youtube.com/watch?v=4jRBRDbJemM",
+      "covered": true
+    },
+    {
+      "id": "aiml_06_ensemble",
+      "title": "Ensemble Methods & Advanced Classical ML",
+      "videoCount": 3,
+      "primaryVideo": "XGBoost Mathematical Foundations by StatQuest",
+      "url": "https://www.youtube.com/watch?v=OtD8wVxBQgU",
+      "covered": true
+    },
+    {
+      "id": "aiml_07_pipelines",
+      "title": "ML Pipelines & Reproducibility",
+      "videoCount": 1,
+      "primaryVideo": "Production ML Pipelines with MLflow and Feature Stores",
+      "url": "https://www.youtube.com/watch?v=9_KkW3XkQ5U",
+      "covered": true
+    },
+    {
+      "id": "aiml_08_deep_learning",
+      "title": "Deep Learning Foundations",
+      "videoCount": 2,
+      "primaryVideo": "Neural Networks & Backpropagation by 3Blue1Brown",
+      "url": "https://www.youtube.com/watch?v=aircAruvnKk",
+      "covered": true
+    },
+    {
+      "id": "aiml_09_pytorch",
+      "title": "PyTorch",
+      "videoCount": 3,
+      "primaryVideo": "Building micrograd by Andrej Karpathy",
+      "url": "https://www.youtube.com/watch?v=VMj-3S1tku0",
+      "covered": true
+    },
+    {
+      "id": "aiml_10_computer_vision",
+      "title": "Computer Vision",
+      "videoCount": 2,
+      "primaryVideo": "Convolutional Neural Networks (CNNs) & Vision Transformers",
+      "url": "https://www.youtube.com/watch?v=YRhxdVk_sIs",
+      "covered": true
+    },
+    {
+      "id": "aiml_11_nlp",
+      "title": "NLP Foundations",
+      "videoCount": 1,
+      "primaryVideo": "Word2Vec & Text Embeddings by StatQuest",
+      "url": "https://www.youtube.com/watch?v=viZrOnJcl9A",
+      "covered": true
+    },
+    {
+      "id": "aiml_12_transformers",
+      "title": "Transformers",
+      "videoCount": 2,
+      "primaryVideo": "Visual Guide to Transformers by 3Blue1Brown",
+      "url": "https://www.youtube.com/watch?v=wjZofJX0v4U",
+      "covered": true
+    },
+    {
+      "id": "aiml_13_llm_foundations",
+      "title": "Large Language Model Foundations",
+      "videoCount": 2,
+      "primaryVideo": "Intro to Large Language Models by Andrej Karpathy",
+      "url": "https://www.youtube.com/watch?v=zjkBMFhNj_g",
+      "covered": true
+    },
+    {
+      "id": "aiml_14_embeddings",
+      "title": "Embeddings & Vector Databases",
+      "videoCount": 1,
+      "primaryVideo": "Vector Databases Explained: Pinecone, Milvus, Qdrant",
+      "url": "https://www.youtube.com/watch?v=klTvEwg3oJ8",
+      "covered": true
+    },
+    {
+      "id": "aiml_15_rag",
+      "title": "RAG & Retrieval Systems",
+      "videoCount": 1,
+      "primaryVideo": "RAG Architecture: Production Retrieval-Augmented Generation",
+      "url": "https://www.youtube.com/watch?v=tcqEUSNCn8I",
+      "covered": true
+    },
+    {
+      "id": "aiml_16_agents",
+      "title": "AI Agents & Tool Use",
+      "videoCount": 1,
+      "primaryVideo": "AI Agents & Function Calling by Harrison Chase (LangChain)",
+      "url": "https://www.youtube.com/watch?v=p1t3z4XqV9g",
+      "covered": true
+    },
+    {
+      "id": "aiml_17_finetuning",
+      "title": "Fine-Tuning & Adaptation",
+      "videoCount": 1,
+      "primaryVideo": "LoRA & QLoRA Fine-Tuning LLMs Explained by Umar Jamil",
+      "url": "https://www.youtube.com/watch?v=PXWYUTMt-AU",
+      "covered": true
+    },
+    {
+      "id": "aiml_18_evaluation_safety",
+      "title": "AI Evaluation & Safety",
+      "videoCount": 2,
+      "primaryVideo": "RLHF, DPO & AI Alignment by StatQuest",
+      "url": "https://www.youtube.com/watch?v=9_KkW3XkQ5U",
+      "covered": true
+    },
+    {
+      "id": "aiml_19_serving",
+      "title": "Model Serving & Inference Fundamentals",
+      "videoCount": 2,
+      "primaryVideo": "TensorRT-LLM and FlashAttention Inference Optimizations",
+      "url": "https://www.youtube.com/watch?v=gT829Qo8b2Y",
+      "covered": true
+    },
+    {
+      "id": "aiml_20_interview",
+      "title": "AI/ML Engineering Interview Preparation",
+      "videoCount": 3,
+      "primaryVideo": "FAANG Machine Learning Engineer Mock Interview",
+      "url": "https://www.youtube.com/watch?v=e3gA5tF-vjM",
+      "covered": true
+    }
+  ]
+}
